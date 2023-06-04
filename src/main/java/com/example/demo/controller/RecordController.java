@@ -18,6 +18,7 @@ public class RecordController {
     @Autowired
     private RecordDao recordDao;
 
+    //查询与该督导绑定的咨询师的咨询记录
     @GetMapping("/supervisorList/{username}")
     public Result bindList(@RequestParam String pageNum, @RequestParam String pageSize, @RequestParam String search, @PathVariable String username){
         int i = Integer.parseInt(pageNum);
