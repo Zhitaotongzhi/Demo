@@ -6,29 +6,27 @@ import javax.persistence.*;
 @Table(name = "record")
 @Entity
 public class Record {
-    private String visitorname;
-    private String counselorname;
-
-    private String counselorusername;
+    private String v_name;
+    private String c_username;
     private String duration;
     private String data;
     private String level;
     private String evaluate;
 
-    public String getVisitorname() {
-        return visitorname;
+    public String getV_name() {
+        return v_name;
     }
 
-    public void setVisitorname(String visitorname) {
-        this.visitorname = visitorname;
+    public void setV_name(String v_name) {
+        this.v_name = v_name;
     }
 
-    public String getCounselorname() {
-        return counselorname;
+    public String getC_username() {
+        return c_username;
     }
 
-    public void setCounselorname(String counselorname) {
-        this.counselorname = counselorname;
+    public void setC_username(String c_username) {
+        this.c_username = c_username;
     }
 
     public String getDuration() {
@@ -63,20 +61,11 @@ public class Record {
         this.evaluate = evaluate;
     }
 
-    public String getCounselorusername() {
-        return counselorusername;
-    }
-
-    public void setCounselorusername(String counselorusername) {
-        this.counselorusername = counselorusername;
-    }
-
     @Override
     public String toString() {
         return "Record{" +
-                "visitorname='" + visitorname + '\'' +
-                ", counselorname='" + counselorname + '\'' +
-                ", counselorusername='" + counselorusername + '\'' +
+                "v_name='" + v_name + '\'' +
+                ", c_username='" + c_username + '\'' +
                 ", duration='" + duration + '\'' +
                 ", data='" + data + '\'' +
                 ", level='" + level + '\'' +

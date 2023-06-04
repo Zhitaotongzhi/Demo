@@ -19,4 +19,8 @@ public interface RecordDao {
     //查找对应咨询师的咨询记录
     List<Record> findAllRecordByConName(int pageNum, int pageSize, String search);
     long findAllRecordByConNameCount();
+    //找到与该督导绑定的咨询师的用户名
+    List<String> findAllBindByUsername(String username);
+    List<Record> findAllRecordBindByUsername(int pageNum, int pageSize, List<String> list);
+    long findAllBindRecordCount(List<String> list);
 }
