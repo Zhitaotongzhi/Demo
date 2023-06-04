@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ConsultantDao">
+    <select id="findAllConsultantByAuthorityNoName" resultType="com.example.demo.domain.Consultant">
+        select * from worker where authority = "Counselor" limit #{pageNum}, #{pageSize}
+    </select>
+
+    <select id="findAllConsultantByAuthority" resultType="com.example.demo.domain.Consultant">
+        select * from worker where authority = "Conselor" and name = #{name} limit #{pageNum}, #{pageSize}
+    </select>
+
+    <select id="findAllConsultantCountNoName" resultType="long">
+        select count(1) from worker where authority = "Conselor"
+    </select>
+
+    <select id="findAllCountCount" resultType="long">
+        select count(1) from worker where name = #{search} and authority = "Conselor"
+    </select>
+
+    <update id="bannedCounselor" parameterType="String">
+        update worker set status = "banned" where username = #{username}
+    </update>
+
+    <update id="enableCounselor">
+        update worker set status = "normal" where username = #{username}
+    </update>
+
+    <select id="selectCounselor" resultType="com.example.demo.domain.Consultant" parameterType="String">
+        select * from worker where username = #{username}
+    </select>
+
+    <update id="updateCounselorByUsername" parameterType="com.example.demo.domain.Consultant">
+        update worker <set>name = #{name}, gender = #{gender}, password = #{password}, pno = #{pno}, email = #{email}, title = #{title}, workunit = #{workunit}</set> where username = #{username}
+    </update>
+
+    <select id="findAllConIsOnline" resultType="com.example.demo.domain.Consultant">
+        select * from worker  where authority = "Counselor" and is_online = "1"
+    </select>
+
+    <select id="findAllConIsOnlineCount" resultType="long">
+        select count(1) from worker where authority = "Counselor" and is_online = "1"
+    </select>
+
+</mapper>

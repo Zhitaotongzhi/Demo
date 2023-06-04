@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>注册页面</title>
+  <link rel="stylesheet" th:href="@{/static.css/login.css}">
+  <style type="text/css">
+    #s1{
+      float: left;
+      margin: 50px 0px 0px 120px;
+    }
+  </style>
+  <script type="text/javascript">
+    function f2(){
+      var regx = /^[a-zA-Z0-9]{5,12}$/;
+      var pno = document.getElementById("pno").value;
+      if(regx.test(pno)){
+        document.getElementById("d2").style.color = "green";
+        document.getElementById("d2").innerHTML="√";
+        return true;
+      }else{
+        document.getElementById("d2").style.color = "red";
+        document.getElementById("d2").innerHTML="×";
+        return false;
+      }
+    }
+    function subForm(){
+      if (f2()){
+        return true;
+      }
+      return false;
+    }
+  </script>
+</head>
+<body>
+<form action="/end" method="get" onsubmit="return subForm()">
+  <table>
+    <tr>
+      <td> <span>姓名：</span></td>
+      <td><input id="name" type="text" name="name" placeholder="请输入您想要设置的姓名！"><span id="d1"></span></td>
+    </tr>
+    <tr>
+      <td>
+        <span>电话号码</span>
+      </td>
+      <td><input id="pno" type="password" name="pno" placeholder="请输入您的电话号码！" onblur="f2()"><span id="d2"></span></td>
+    </tr>
+    <tr>
+      <td>
+        <span>紧急联系人姓名</span>
+      </td>
+      <td><input id="contact_name" type="text" name="contact_name" placeholder="请输入您的紧急联系人！"><span id="d3"></span></td>
+    </tr>
+    <tr>
+      <td>
+        <span>紧急联系人电话：</span>
+      </td>
+      <td><input id="contact_pno" type="text" name="contact_pno" placeholder="请输入您的紧急联系人的电话号码！"><span id="d4"></span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input id="s1" type="submit" value="注册"></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

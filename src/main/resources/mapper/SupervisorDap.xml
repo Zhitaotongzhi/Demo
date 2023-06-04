@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.SupervisorDao">
+    <select id="findAllSupervisorByAuthority" resultType="com.example.demo.domain.Supervisor">
+        select * from worker where name=#{name} and authority = "Supervisor" limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="findAllSupervisorCount" resultType="long">
+        select count(1) from worker where name = #{search} and authority = "Supervisor"
+    </select>
+
+    <select id="findAllSupervisor" resultType="com.example.demo.domain.Supervisor">
+        select * from worker where authority = "Supervisor" limit #{pageNum}, #{pageSize}
+    </select>
+
+    <select id="findAllSupervisorCountNoName" resultType="long">
+        select count(1) from worker where authority = "Supervisor"
+    </select>
+
+    <update id="bannedSupervisor">
+        update worker set status = "banned" where username = #{username}
+    </update>
+
+    <update id="enableSupervisor">
+        update worker set status = "normal" where username = #{username}
+    </update>
+
+    <select id="selectSupervisorByUsername" resultType="com.example.demo.domain.Supervisor">
+        select * from worker where username = #{username}
+    </select>
+
+    <update id="updeteSupervisorByUsername">
+        update worker <set>name = #{name}, gender = #{gender}, password = #{password}, title = #{title}, workunit = #{workunit}, pno = #{pno}, email = #{email} </set> where username = #{username}
+    </update>
+</mapper>

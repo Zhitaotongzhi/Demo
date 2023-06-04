@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--映射Dao层接口-->
+<!--管理员登录-->
+<mapper namespace="com.example.demo.dao.AdminDao">
+    <!--管理员登录-->
+    <select id="selectAdByUsername" resultType="com.example.demo.domain.Admin" parameterType="String">
+        select * from worker where username = #{username}
+    </select>
+
+    <!--新建咨询师-->
+    <insert id="insertConsultant" parameterType="com.example.demo.domain.Consultant">
+        insert into worker(name,username,bind_username,password,gender,pno,email,status,authority) values (#{name},#{username},#{bind_username},#{password},#{gender},#{pno},#{email},#{status},#{authority})
+    </insert>
+    <!--确定权限-->
+    <select id="selectAuByUsername" resultType="String" parameterType="String">
+        select authority from worker where username = #{username}
+    </select>
+    <!--新建督导-->
+    <insert id="insertSupervisor" parameterType="com.example.demo.domain.Supervisor">
+        insert into worker(name,username,password,gender,pno,email,title,workunit,status,authority)
+        values (#{name},#{username},#{password},#{gender},#{pno},#{email},#{title},#{workunit},#{status},"supervisor")
+    </insert>
+    <!--更新访客账号状态-->
+    <update id="bannedByPno"  >
+        update visitor set status = "banned" where pno = #{pno}
+    </update>
+    <update id="enableByPno" >
+        update visitor set status = "normal" where pno = #{pno}
+    </update>
+    <!--更新咨询师或督导账号状态-->
+    <update id="updateByUsername" parameterType="com.example.demo.domain.Consultant">
+        update worker set status = #{status} where username = #{username}
+    </update>
+    <!--查看所有访客-->
+    <select id="findAllVisitorByPage" resultType="com.example.demo.domain.Visitor">
+        select * from visitor limit #{pageNum},#{pageSize}
+    </select>
+    <select id="findVisitorCount" resultType="long">
+        select count(1)  from visitor
+    </select>
+    <select id="selectByPno" parameterType="String" resultType="com.example.demo.domain.Visitor">
+        select * from visitor where pno = #{pno}
+    </select>
+
+    <select id="selectConByUsername" resultType="com.example.demo.domain.Consultant" parameterType="String">
+        select * from worker where username = #{username}
+    </select>
+
+    <select id="selectSupByUsername" resultType="com.example.demo.domain.Supervisor">
+        select * from worker where username = #{username}
+    </select>
+
+</mapper>

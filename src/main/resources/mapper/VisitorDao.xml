@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--映射Dao接口类-->
+<mapper namespace="com.example.demo.dao.VisitorDao">
+    <select id="selectVisByPno" resultType="com.example.demo.domain.Visitor" parameterType="String">
+        select * from visitor where pno = #{pno}
+    </select>
+
+    <insert id="insertVisitor" parameterType="com.example.demo.domain.Visitor">
+        insert into visitor(name,gender,password,pno,contact_name,contact_pno) values (#{name},#{gender},#{password},#{pno},#{contact_name},#{contact_pno})
+    </insert>
+
+    <select id="findallVisitor" resultType="com.example.demo.domain.Visitor">
+        select * from visitor where name=#{name} limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="findVisitorCount" resultType="long">
+        select count(1)  from visitor where name=#{search}
+    </select>
+
+    <!--更新用户信息-->
+    <update id="updateVisitor">
+        update visitor <set>name = #{name}, gender = #{gender}, contact_name = #{contact_name}, contact_pno = #{contact_pno}, image = #{image}</set> where pno = #{pno}
+    </update>
+</mapper>

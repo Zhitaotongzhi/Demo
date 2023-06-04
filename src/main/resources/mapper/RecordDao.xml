@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.RecordDao">
+    <!--查询所有咨询记录-->
+    <select id="findAllRecord" resultType="com.example.demo.domain.Record">
+        select * from record limit #{pageNum}, #{pageSize}
+    </select>
+    <select id="findAllRecordCount" resultType="long">
+        select count(1) from record
+    </select>
+    <!--查找对应访客的咨询记录-->
+    <select id="findAllRecordByName" resultType="com.example.demo.domain.Record">
+        select * from record where v_name like #{search}"%" limit #{pageNum}, #{pageSize}
+    </select>
+    <select id="findAllRecordByNameCount" resultType="long">
+        select count(1) from where v_name = #{search}
+    </select>
+    <!--查找对应咨询师的咨询记录-->
+    <select id="findAllRecordByConName" resultType="com.example.demo.domain.Record">
+        select * from record where c_name like #{search}"%" limit #{pageNum}, #{pageSize}
+    </select>
+    <select id="findAllRecordByConNameCount" resultType="long">
+        select count(1) from record where c_name = #{search}
+    </select>
+</mapper>
