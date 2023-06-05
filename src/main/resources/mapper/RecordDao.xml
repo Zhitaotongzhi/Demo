@@ -23,6 +23,18 @@
     <select id="findAllRecordByConNameCount" resultType="long">
         select count(1) from record where c_username = #{username}
     </select>
+    <!--查找对应咨询师和访客的咨询记录-->
+    <select id="findAllRecordByNameAndUserame" resultType="com.example.demo.domain.Record">
+        select * from record where v_name = #{name} and c_username = #{username} limit #{pageNum}, #{pageSize}
+    </select>
+    <!--查找对应时间的咨询记录-->
+    <select id="findAllRecordByTime" resultType="com.example.demo.domain.Record">
+        select * from record where starttime between #{startTime} and #{endTime}
+    </select>
+    <!--查找满足所有条件的咨询记录-->
+    <select id="findAllRecordByAll" resultType="com.example.demo.domain.Record">
+        select * from record where v_name = #{name} and c_username = #{username} and starttime between #{startTime} and #{endTime}
+    </select>
     <!--找到所有与该督导绑定的咨询师的username-->
     <select id="findAllBindByUsername" parameterType="String" resultType="String">
         select username from worker where bind_username = #{username}

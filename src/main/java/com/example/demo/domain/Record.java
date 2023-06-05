@@ -9,7 +9,7 @@ public class Record {
     private String v_name;
     private String c_username;
     private String duration;
-    private String data;
+    private String starttime;
     private String level;
     private String evaluate;
 
@@ -37,12 +37,12 @@ public class Record {
         this.duration = duration;
     }
 
-    public String getData() {
-        return data;
+    public String getStarttime() {
+        return starttime;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setStarttime(String starttime) {
+        this.starttime = starttime;
     }
 
     public String getLevel() {
@@ -67,7 +67,7 @@ public class Record {
                 "v_name='" + v_name + '\'' +
                 ", c_username='" + c_username + '\'' +
                 ", duration='" + duration + '\'' +
-                ", data='" + data + '\'' +
+                ", starttime='" + starttime + '\'' +
                 ", level='" + level + '\'' +
                 ", evaluate='" + evaluate + '\'' +
                 '}';

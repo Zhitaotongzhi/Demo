@@ -23,4 +23,10 @@ public interface RecordDao {
     List<String> findAllBindByUsername(String username);
     List<Record> findAllRecordBindByUsername(int pageNum, int pageSize, List<String> list);
     long findAllBindRecordCount(List<String> list);
+    //通过咨询师用户名和访客姓名找到咨询记录
+    List<Record> findAllRecordByNameAndUserame(int pageNum, int pageSize, String name, String username);
+    //根据时间范围查找
+    List<Record> findAllRecordByTime(int pageNum, int pageSize, String startTime, String endTime);
+    //所有条件全有
+    List<Record> findAllRecordByAll(int pageNum, int pageSize, String name, String username, String startTime, String endTime);
 }

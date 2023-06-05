@@ -44,6 +44,27 @@ public class RecordController {
             record.put("total", records.size());
             record.put("records", records);
             return Result.success(record);
+        }else if(!name.isEmpty() && !username.isEmpty() && startTime.isEmpty()){
+            List<Record> records = recordDao.findAllRecordByNameAndUserame((i - 1) * j, j, name, username);
+            long total = records.size();
+            Map<String, Object> record = new HashMap<>();
+            record.put("total", total);
+            record.put("records", records);
+            return Result.success(record);
+        }else if(name.isEmpty() && username.isEmpty() && !startTime.isEmpty()){
+            List<Record> records = recordDao.findAllRecordByTime((i - 1) * j, j, startTime, endTime);
+            long total = records.size();
+            Map<String, Object> record = new HashMap<>();
+            record.put("total", total);
+            record.put("records", records);
+            return Result.success(record);
+        }else if(!name.isEmpty() && !username.isEmpty()  && !startTime.isEmpty()){
+            List<Record> records = recordDao.findAllRecordByAll((i - 1) * j, j, name, username, startTime, endTime);
+            long total = records.size();
+            Map<String, Object> record = new HashMap<>();
+            record.put("total", total);
+            record.put("records", records);
+            return Result.success(record);
         }else{
             return Result.failure("2", "操作失败");
         }
