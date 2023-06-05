@@ -14,10 +14,10 @@ public interface RecordDao {
     List<Record> findAllRecord(int pageNum, int pageSize);
     long findAllRecordCount();
     //查找对应访客的咨询记录
-    List<Record> findAllRecordByName(int pageNum, int pageSize, String search);
+    List<Record> findAllRecordByName(int pageNum, int pageSize, String name);
     long findAllRecordByNameCount();
     //查找对应咨询师的咨询记录
-    List<Record> findAllRecordByConName(int pageNum, int pageSize, String search);
+    List<Record> findAllRecordByConName(int pageNum, int pageSize, String username);
     long findAllRecordByConNameCount();
     //找到与该督导绑定的咨询师的用户名
     List<String> findAllBindByUsername(String username);

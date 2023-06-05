@@ -11,17 +11,17 @@
     </select>
     <!--查找对应访客的咨询记录-->
     <select id="findAllRecordByName" resultType="com.example.demo.domain.Record">
-        select * from record where v_name like #{search}"%" limit #{pageNum}, #{pageSize}
+        select * from record where v_name like #{name}"%" limit #{pageNum}, #{pageSize}
     </select>
     <select id="findAllRecordByNameCount" resultType="long">
-        select count(1) from where v_name = #{search}
+        select count(1) from record where v_name = #{name}
     </select>
     <!--查找对应咨询师的咨询记录-->
     <select id="findAllRecordByConName" resultType="com.example.demo.domain.Record">
-        select * from record where c_name like #{search}"%" limit #{pageNum}, #{pageSize}
+        select * from record where c_username like #{username}"%" limit #{pageNum}, #{pageSize}
     </select>
     <select id="findAllRecordByConNameCount" resultType="long">
-        select count(1) from record where c_name = #{search}
+        select count(1) from record where c_username = #{username}
     </select>
     <!--找到所有与该督导绑定的咨询师的username-->
     <select id="findAllBindByUsername" parameterType="String" resultType="String">
