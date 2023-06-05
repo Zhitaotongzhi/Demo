@@ -17,6 +17,7 @@ public class Worker {
     private String title;
     private String workunit;
     private String is_online;
+    private String is_Busy;
 
     public String getUsername() {
         return username;
@@ -98,6 +99,14 @@ public class Worker {
         this.is_online = is_online;
     }
 
+    public String getIs_Busy() {
+        return is_Busy;
+    }
+
+    public void setIs_Busy(String is_Busy) {
+        this.is_Busy = is_Busy;
+    }
+
     @Override
     public String toString() {
         return "Worker{" +
@@ -111,6 +120,7 @@ public class Worker {
                 ", title='" + title + '\'' +
                 ", workunit='" + workunit + '\'' +
                 ", is_online='" + is_online + '\'' +
+                ", is_Busy='" + is_Busy + '\'' +
                 '}';
     }
 }

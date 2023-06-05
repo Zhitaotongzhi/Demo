@@ -22,4 +22,6 @@ public interface VisitorDao {
     long findVisitorCount();
 
     public int updateVisitor(Visitor visitor);
+    //通过手机号查找姓名
+    public String findName(String pno);
 }

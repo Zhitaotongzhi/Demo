@@ -23,6 +23,36 @@ public class Consultant {
     private String authority;
     private int is_online;
 
+    public String getIs_Busy() {
+        return is_Busy;
+    }
+
+    public void setIs_Busy(String is_Busy) {
+        this.is_Busy = is_Busy;
+    }
+
+    private String is_Busy;
+
+    @Override
+    public String toString() {
+        return "Consultant{" +
+                "username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", bind_name='" + bind_name + '\'' +
+                ", bind_username='" + bind_username + '\'' +
+                ", gender='" + gender + '\'' +
+                ", pno='" + pno + '\'' +
+                ", email='" + email + '\'' +
+                ", title='" + title + '\'' +
+                ", workunit='" + workunit + '\'' +
+                ", status='" + status + '\'' +
+                ", authority='" + authority + '\'' +
+                ", is_online=" + is_online +
+                ", is_Busy='" + is_Busy + '\'' +
+                '}';
+    }
+
     public String getUsername() {
         return username;
     }
@@ -127,22 +157,4 @@ public class Consultant {
         this.workunit = workunit;
     }
 
-    @Override
-    public String toString() {
-        return "Consultant{" +
-                "username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", bind_name='" + bind_name + '\'' +
-                ", bind_username='" + bind_username + '\'' +
-                ", gender='" + gender + '\'' +
-                ", pno='" + pno + '\'' +
-                ", email='" + email + '\'' +
-                ", title='" + title + '\'' +
-                ", workunit='" + workunit + '\'' +
-                ", status='" + status + '\'' +
-                ", authority='" + authority + '\'' +
-                ", is_online=" + is_online +
-                '}';
-    }
 }

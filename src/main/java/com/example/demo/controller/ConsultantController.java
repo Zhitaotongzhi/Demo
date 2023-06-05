@@ -111,4 +111,16 @@ public class ConsultantController {
         counselor.put("counselors", list);
         return Result.success(counselor);
     }
+    //更新忙闲状态
+    @PostMapping("/updateIsBusy")
+    public Result updateIsBusy(@RequestParam String username){
+        consultantDao.updateConIsBusy(username);
+        return Result.success();
+    }
+    @PostMapping("/updateIsFree")
+    public Result updateIsFree(@RequestParam String username){
+        consultantDao.updateConIsFree(username);
+        return Result.success();
+    }
+
 }

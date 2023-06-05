@@ -41,4 +41,16 @@
         select count(1) from worker where authority = "Counselor" and is_online = "1"
     </select>
 
+    <update id="updateConIsBusy">
+        update worker set is_Busy = "busy" where username = #{username}
+    </update>
+
+    <update id="updateConIsFree">
+        update worker set is_Busy = "free" where username = #{username}
+    </update>
+
+    <select id="findUsername" parameterType="String">
+        select username from worker where name = #{and} and authority = "Counselor"
+    </select>
+
 </mapper>

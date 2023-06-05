@@ -40,6 +40,9 @@ public interface RecordDao {
     List<Record> findAllBindRecordByNameAndUsername(int pageNum, int pageSize, String name, String username);
     //督导通过时间查询与自己绑定的咨询师的咨询记录
     List<Record> findAllBindRecordByTime(int pageNum, int pageSize, String startTime, String endTime, List<String> list);
-    //查找一段时间内访客的咨询记录
+    //返回一位用户最后一次咨询的日期
+    public String findLatestTime(String name);
+    //通过日期返回评价
+    public String findEvaluate(String time);
 
 }

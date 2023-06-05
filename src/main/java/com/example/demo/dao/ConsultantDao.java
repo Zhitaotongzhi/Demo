@@ -31,4 +31,9 @@ public interface ConsultantDao {
     List<Consultant> findAllConIsOnline();
     //统计在线咨询师数量
     long findAllConIsOnlineCount();
+    //更新空闲忙碌状态
+    public void updateConIsBusy(String username);
+    public void updateConIsFree(String username);
+    //通过姓名返回用户名
+    public String findUsername(String name);
 }

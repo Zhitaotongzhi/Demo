@@ -11,21 +11,21 @@
     </select>
     <!--查找对应访客的咨询记录-->
     <select id="findAllRecordByName" resultType="com.example.demo.domain.Record">
-        select * from record where v_name like #{name}"%" limit #{pageNum}, #{pageSize}
+        select * from record where v_name like #{visitorName}"%" limit #{pageNum}, #{pageSize}
     </select>
     <select id="findAllRecordByNameCount" resultType="long">
-        select count(1) from record where v_name = #{name}
+        select count(1) from record where v_name = #{visitorName}
     </select>
     <!--查找对应咨询师的咨询记录-->
     <select id="findAllRecordByConName" resultType="com.example.demo.domain.Record">
-        select * from record where c_username like #{username}"%" limit #{pageNum}, #{pageSize}
+        select * from record where c_name like #{counselorName}"%" limit #{pageNum}, #{pageSize}
     </select>
     <select id="findAllRecordByConNameCount" resultType="long">
-        select count(1) from record where c_username = #{username}
+        select count(1) from record where c_name = #{counselorName}
     </select>
     <!--查找对应咨询师和访客的咨询记录-->
     <select id="findAllRecordByNameAndUserame" resultType="com.example.demo.domain.Record">
-        select * from record where v_name = #{name} and c_username = #{username} limit #{pageNum}, #{pageSize}
+        select * from record where v_name = #{visitorName} and c_name = #{counselorName} limit #{pageNum}, #{pageSize}
     </select>
     <!--查找对应时间的咨询记录-->
     <select id="findAllRecordByTime" resultType="com.example.demo.domain.Record">
@@ -33,28 +33,28 @@
     </select>
     <!--访客一段时间内的咨询记录-->
     <select id="findAllRecordByNameAndTime" resultType="com.example.demo.domain.Record">
-        select * from record where v_name = #{name} and starttime between #{startTime} and #{endTime}
+        select * from record where v_name = #{visitorName} and starttime between #{startTime} and #{endTime}
     </select>
 
     <!--咨询师一段时间内的咨询记录-->
     <select id="findAllRecordByUsernameAndTime" resultType="com.example.demo.domain.Record">
-        select * from record where c_username = #{username} and starttime between #{startTime} and #{endTime}
+        select * from record where c_name = #{counselorName} and starttime between #{startTime} and #{endTime}
     </select>
     <!--查找满足所有条件的咨询记录-->
     <select id="findAllRecordByAll" resultType="com.example.demo.domain.Record">
-        select * from record where v_name = #{name} and c_username = #{username} and starttime between #{startTime} and #{endTime}
+        select * from record where v_name = #{visitorName} and c_name = #{counselorName} and starttime between #{startTime} and #{endTime}
     </select>
-    <!--找到所有与该督导绑定的咨询师的username-->
+    <!--找到所有与该督导绑定的咨询师的name-->
     <select id="findAllBindByUsername" parameterType="String" resultType="String">
-        select username from worker where bind_username = #{username}
+        select name from worker where bind_username = #{username}
     </select>
     <!--找到与自己绑定的咨询师的咨询记录-->
     <select id="findAllRecordBindByUsername" resultType="com.example.demo.domain.Record">
         select * from record <where>
         <if test="list != null and list.size() > 0">
-            AND c_username in
-                        <foreach collection="list" item="username" open = "(" separator="," close=")">
-                            #{username}
+            AND c_name in
+                        <foreach collection="list" item="counselorName" open = "(" separator="," close=")">
+                            #{counselorName}
                         </foreach>
         </if>
     </where> limit #{pageNum}, #{pageSize}
@@ -63,9 +63,9 @@
     <select id="findAllBindRecordCount" resultType="long">
         select count(1) from record <where>
         <if test="list != null and list.size() > 0">
-            AND c_username in
-                        <foreach collection="list" item="username" open="(" separator="," close=")">
-                            #{username}
+            AND c_name in
+                        <foreach collection="list" item="counselorName" open="(" separator="," close=")">
+                            #{counselorName}
                         </foreach>
         </if>
     </where>
@@ -73,8 +73,8 @@
     <!--通过姓名查询与自己绑定的咨询师的咨询记录-->
     <select id="findAllBindRecordByName"  resultType="com.example.demo.domain.Record">
         select * from record <where>  <if test="list != null and list.size() > 0">
-        AND c_username in <foreach collection="list" item="username" open="(" separator="," close=")">
-        #{username}
+        AND c_name in <foreach collection="list" item="counselorName" open="(" separator="," close=")">
+        #{counselorame}
     </foreach>
     </if> and v_name = #{name}
     </where>
@@ -83,10 +83,17 @@
     <select id="findAllBindRecordByTime" resultType="com.example.demo.domain.Record">
         select * from record <where>
         <if test="list != null and list.size() > 0">
-            AND c_username in <foreach collection="list" item="username" open="(" separator="," close=")">
-            #{username}
+            AND c_name in <foreach collection="list" item="counselorName" open="(" separator="," close=")">
+            #{counselorName}
         </foreach>
         </if> and starttime between #{startTime} and #{endTime}
     </where>
+    </select>
+    <!--返回访客最后一次咨询的时间-->
+    <select id="findLatestTime" parameterType="String">
+        select max(starttime) from record name = #{name}
+    </select>
+    <select id="findEvaluate" parameterType="String">
+        select evaluate from record where starttime = #{time}
     </select>
 </mapper>
