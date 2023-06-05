@@ -29,4 +29,11 @@ public interface RecordDao {
     List<Record> findAllRecordByTime(int pageNum, int pageSize, String startTime, String endTime);
     //所有条件全有
     List<Record> findAllRecordByAll(int pageNum, int pageSize, String name, String username, String startTime, String endTime);
+
+    //督导通过姓名查看与自己绑定的咨询师的咨询师的咨询记录
+    List<Record> findAllBindRecordByName(int pageNum, int pageSize, String name, List<String> list);
+    //督导通过姓名和用户名查找与自己绑定的咨询师的咨询记录
+    List<Record> findAllBindRecordByNameAndUsername(int pageNum, int pageSize, String name, String username);
+    //督导通过时间查询与自己绑定的咨询师的咨询记录
+    List<Record> findAllBindRecordByTime(int pageNum, int pageSize, String startTime, String endTime, List<String> list);
 }
