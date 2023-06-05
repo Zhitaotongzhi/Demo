@@ -31,6 +31,15 @@
     <select id="findAllRecordByTime" resultType="com.example.demo.domain.Record">
         select * from record where starttime between #{startTime} and #{endTime}
     </select>
+    <!--访客一段时间内的咨询记录-->
+    <select id="findAllRecordByNameAndTime" resultType="com.example.demo.domain.Record">
+        select * from record where v_name = #{name} and starttime between #{startTime} and #{endTime}
+    </select>
+
+    <!--咨询师一段时间内的咨询记录-->
+    <select id="findAllRecordByUsernameAndTime" resultType="com.example.demo.domain.Record">
+        select * from record where c_username = #{username} and starttime between #{startTime} and #{endTime}
+    </select>
     <!--查找满足所有条件的咨询记录-->
     <select id="findAllRecordByAll" resultType="com.example.demo.domain.Record">
         select * from record where v_name = #{name} and c_username = #{username} and starttime between #{startTime} and #{endTime}
