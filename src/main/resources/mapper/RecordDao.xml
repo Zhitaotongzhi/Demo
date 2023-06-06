@@ -96,4 +96,22 @@
     <select id="findEvaluate" parameterType="String">
         select evaluate from record where starttime = #{time}
     </select>
+
+    <!--咨询师查看的咨询记录-->
+    <!--查看所有的咨询记录-->
+    <select id="findAllSelfRecord" resultType="com.example.demo.domain.Record">
+        select * from record where c_name = #{counselorName} limit #{pageNum}, #{pageSize}
+    </select>
+    <!--访客姓名查询-->
+    <select id="findAllSelfRecordByName" resultType="com.example.demo.domain.Record">
+        select * from record where c_name = #{counselorName} and v_name = #{visitorName} limit #{pageNum}, #{pageSize}
+    </select>
+    <!--时间查询-->
+    <select id="findAllSelfRecordByTime" resultType="com.example.demo.domain.Record">
+        select * from record where c_name = #{counselorName} and starttime between #{startTime} and #{endTime} limit #{pageNum}, #{pageSize}
+    </select>
+    <!--所有条件查询-->
+    <select id="findAllSelfRecordByAll" resultType="com.example.demo.domain.Record">
+        select * from record where c_name = #{counselorName} and v_name = {visitorName} and starttime between #{startTime} and #{endTime} limit #{pageNum}, #{pageSize}
+    </select>
 </mapper>

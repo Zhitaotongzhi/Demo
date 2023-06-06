@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.ConsultantDao;
 import com.example.demo.domain.Record;
 import com.example.demo.dao.RecordDao;
 import com.example.demo.utils.Result;
@@ -17,6 +18,9 @@ import java.util.Map;
 public class RecordController {
     @Autowired
     private RecordDao recordDao;
+
+    @Autowired
+    private ConsultantDao consultantDao;
 
 
 
@@ -141,5 +145,42 @@ public class RecordController {
         }
     }
 
-    //返回访客上一次
+    //咨询师查看自己的咨询记录
+    @GetMapping("/listForCounselor/{username}")
+    public Result selfRecord(@RequestParam String pageNum, @RequestParam String pageSize, @RequestParam String visitorName, @RequestParam String startTime, @RequestParam String endTime, @PathVariable String username){
+        int i = Integer.parseInt(pageNum);
+        int j = Integer.parseInt(pageSize);
+        String counselorName = consultantDao.findName(username);
+        if(visitorName.isEmpty() && startTime.isEmpty()){
+            List<Record> records = recordDao.findAllSelfRecord((i - 1) * j, j, counselorName);
+            long total = records.size();
+            Map<String, Object> record = new HashMap<>();
+            record.put("total", total);
+            record.put("records", records);
+            return Result.success(record);
+        }else if(!visitorName.isEmpty() && startTime.isEmpty()){
+            List<Record> records = recordDao.findAllSelfRecordByName((i - 1) * j, j, counselorName, visitorName);
+            long total = records.size();
+            Map<String, Object> record = new HashMap<>();
+            record.put("total", total);
+            record.put("records", records);
+            return Result.success(record);
+        }else if(visitorName.isEmpty() && !startTime.isEmpty()){
+            List<Record> records = recordDao.findAllSelfRecordByTime((i - 1) * j, j, counselorName, startTime, endTime);
+            long total = records.size();
+            Map<String, Object> record = new HashMap<>();
+            record.put("total", total);
+            record.put("records", records);
+            return Result.success(record);
+        }else if(!visitorName.isEmpty() && !startTime.isEmpty()){
+            List<Record> records = recordDao.findAllSelfRecordByAll((i - 1) * j, j, counselorName, visitorName, startTime, endTime);
+            long total = records.size();
+            Map<String, Object> record = new HashMap<>();
+            record.put("total", total);
+            record.put("records", records);
+            return Result.success(record);
+        }else{
+            return Result.failure("2", "操作失败");
+        }
+    }
 }

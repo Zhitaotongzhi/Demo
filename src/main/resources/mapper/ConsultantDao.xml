@@ -49,8 +49,8 @@
         update worker set is_Busy = "free" where username = #{username}
     </update>
 
-    <select id="findUsername" parameterType="String">
-        select username from worker where name = #{and} and authority = "Counselor"
+    <select id="findName" parameterType="String">
+        select name from worker where username = #{username} and authority = "Counselor"
     </select>
 
 </mapper>

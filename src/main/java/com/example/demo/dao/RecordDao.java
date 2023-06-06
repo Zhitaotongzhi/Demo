@@ -44,5 +44,13 @@ public interface RecordDao {
     public String findLatestTime(String name);
     //通过日期返回评价
     public String findEvaluate(String time);
-
+    //咨询师查询的咨询记录
+    //咨询师查看的全部的咨询记录
+    List<Record> findAllSelfRecord(int pageNum, int pageSize, String counselorName);
+    //通过访客姓名查询
+    List<Record> findAllSelfRecordByName(int pageNum, int pageSize, String counselorName, String visitorName);
+    //通过时间查询
+    List<Record> findAllSelfRecordByTime(int pageNum, int pageSize, String counselorName, String startTime, String endTime);
+    //通过所有条件查询
+    List<Record> findAllSelfRecordByAll(int pageNum, int pageSize, String counselorName, String visitorName, String startTime, String endTime);
 }

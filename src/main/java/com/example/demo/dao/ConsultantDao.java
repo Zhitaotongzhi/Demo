@@ -35,5 +35,5 @@ public interface ConsultantDao {
     public void updateConIsBusy(String username);
     public void updateConIsFree(String username);
     //通过姓名返回用户名
-    public String findUsername(String name);
+    public String findName(String username);
 }
