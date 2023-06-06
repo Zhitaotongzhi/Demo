@@ -12,6 +12,7 @@ import com.example.demo.utils.Result;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.demo.utils.RegExUtil;
 
 import com.google.gson.JsonObject;
 
@@ -62,6 +63,7 @@ public class AdminController {
     @PostMapping("/user/login")
     public Result adminLogin(@RequestBody Worker worker){
         String username = worker.getUsername();
+        String password = worker.getPassword();
         Worker new_worker = workerDao.selectWorkerByUsername(username);
         boolean login = workerService.login(worker);
         if(login == true) {

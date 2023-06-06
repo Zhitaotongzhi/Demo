@@ -18,19 +18,20 @@ import java.util.regex.Pattern;
 public class AdminService {
     @Autowired
     AdminDao adminDao;
-    //private static String regEx1 = "^[a-zA-Z0-9\\u4e00-\\u9fa5\\\\s]{2,32}$";
-    //private static String regEx2 = "^.{6,}$";
+    private static String regEx1 = "^[a-zA-Z_]+$";
+    private static String regEx2 = "^.{6,}$";
 
     //管理员登录
     public boolean login(Admin admin) {
         String loginUsername = admin.getUsername();
         String loginPassword = admin.getPassword();
-        //Pattern Password_Pattern = Pattern.compile(regEx2);
-        ///Matcher matcher = Password_Pattern.matcher(loginPassword);
+        Pattern Password_Pattern = Pattern.compile(regEx1);
+        Matcher matcher = Password_Pattern.matcher(loginUsername);
 
         Admin loginAdmin = adminDao.selectAdByUsername(loginUsername);
         System.out.println("进行验证");
         System.out.println(loginUsername);
+
         if (loginAdmin == null) {
                 return false;
         } else if (loginAdmin.getPassword().equals(loginPassword)) {
