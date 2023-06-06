@@ -53,8 +53,8 @@
         select name from worker where username = #{username} and authority = "Counselor"
     </select>
 
-    <select id="findAllCounselor" resultType="com.example.demo.domain.Consultant">
+    <!--<select id="findAllCounselor" resultType="com.example.demo.domain.Consultant">
         select * from worker where authority = "Counselor"
-    </select>
+    </select>-->
 
 </mapper>

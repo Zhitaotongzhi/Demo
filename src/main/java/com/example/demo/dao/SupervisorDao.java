@@ -27,5 +27,5 @@ public interface SupervisorDao {
     //通过用户名更新督导信息
     public void updeteSupervisorByUsername(Supervisor supervisor);
     //找到所有督导
-    List<Supervisor> findAllSupervisor();
+    //List<Supervisor> findAllSupervisor();
 }
