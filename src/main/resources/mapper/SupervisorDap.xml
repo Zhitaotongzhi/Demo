@@ -33,4 +33,8 @@
     <update id="updeteSupervisorByUsername">
         update worker <set>name = #{name}, gender = #{gender}, password = #{password}, title = #{title}, workunit = #{workunit}, pno = #{pno}, email = #{email} </set> where username = #{username}
     </update>
+
+    <select id="findAllSupervisor" resultType="com.example.demo.domain.Supervisor">
+        select * from worker where authority = "Supervisor"
+    </select>
 </mapper>

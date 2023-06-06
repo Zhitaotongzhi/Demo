@@ -36,4 +36,8 @@ public interface ConsultantDao {
     public void updateConIsFree(String username);
     //通过姓名返回用户名
     public String findName(String username);
+    //返回所有咨询师信息
+    List<Consultant> findAllCounselor();
+
+
 }
