@@ -197,5 +197,13 @@ public class RecordController {
     }
 
     //插入新的咨询记录
-
+    @PostMapping("/insert")
+    public Result insertRecord(@RequestBody Record record){
+        int i = recordDao.insertRecord(record);
+        if(i > 0){
+            return Result.success();
+        }else{
+            return Result.failure("2", "操作失败");
+        }
+    }
 }
