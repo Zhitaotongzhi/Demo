@@ -33,7 +33,6 @@ public interface RecordDao {
     List<Record> findAllRecordByUsernameAndTime(int pageNum, int pageSize, String username, String startTime, String endTime);
     //所有条件全有
     List<Record> findAllRecordByAll(int pageNum, int pageSize, String name, String username, String startTime, String endTime);
-
     //督导通过姓名查看与自己绑定的咨询师的咨询师的咨询记录
     List<Record> findAllBindRecordByName(int pageNum, int pageSize, String name, List<String> list);
     //督导通过姓名和用户名查找与自己绑定的咨询师的咨询记录
@@ -53,4 +52,9 @@ public interface RecordDao {
     List<Record> findAllSelfRecordByTime(int pageNum, int pageSize, String counselorName, String startTime, String endTime);
     //通过所有条件查询
     List<Record> findAllSelfRecordByAll(int pageNum, int pageSize, String counselorName, String visitorName, String startTime, String endTime);
+    //访客查看自己的咨询记录
+    List<Record> findAllVisitorRecordByPno(String pno);
+    //插入咨询记录
+    public int insertRecord(Record record);
+
 }

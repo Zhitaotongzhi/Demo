@@ -22,6 +22,8 @@ public class Consultant {
     private String status;
     private String authority;
     private int is_online;
+    private int limit;
+    private int orderNumber;
 
     public String getIs_Busy() {
         return is_Busy;
@@ -49,6 +51,8 @@ public class Consultant {
                 ", status='" + status + '\'' +
                 ", authority='" + authority + '\'' +
                 ", is_online=" + is_online +
+                ", limit=" + limit +
+                ", orderNumber=" + orderNumber +
                 ", is_Busy='" + is_Busy + '\'' +
                 '}';
     }
@@ -157,4 +161,19 @@ public class Consultant {
         this.workunit = workunit;
     }
 
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 }

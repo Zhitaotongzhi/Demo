@@ -12,6 +12,8 @@ public class Record {
     private String starttime;
     private String level;
     private String evaluate;
+    private String rid;
+    private String pno;
 
     public String getV_name() {
         return v_name;
@@ -61,6 +63,22 @@ public class Record {
         this.evaluate = evaluate;
     }
 
+    public String getRid() {
+        return rid;
+    }
+
+    public void setRid(String rid) {
+        this.rid = rid;
+    }
+
+    public String getPno() {
+        return pno;
+    }
+
+    public void setPno(String pno) {
+        this.pno = pno;
+    }
+
     @Override
     public String toString() {
         return "Record{" +
@@ -70,6 +88,8 @@ public class Record {
                 ", starttime='" + starttime + '\'' +
                 ", level='" + level + '\'' +
                 ", evaluate='" + evaluate + '\'' +
+                ", rid='" + rid + '\'' +
+                ", pno='" + pno + '\'' +
                 '}';
     }
 }

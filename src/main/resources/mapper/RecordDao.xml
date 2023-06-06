@@ -29,20 +29,20 @@
     </select>
     <!--查找对应时间的咨询记录-->
     <select id="findAllRecordByTime" resultType="com.example.demo.domain.Record">
-        select * from record where starttime between #{startTime} and #{endTime}
+        select * from record where starttime between #{startDate} and #{endDate}
     </select>
     <!--访客一段时间内的咨询记录-->
     <select id="findAllRecordByNameAndTime" resultType="com.example.demo.domain.Record">
-        select * from record where v_name = #{visitorName} and starttime between #{startTime} and #{endTime}
+        select * from record where v_name = #{visitorName} and starttime between #{startDate} and #{endDate}
     </select>
 
     <!--咨询师一段时间内的咨询记录-->
     <select id="findAllRecordByUsernameAndTime" resultType="com.example.demo.domain.Record">
-        select * from record where c_name = #{counselorName} and starttime between #{startTime} and #{endTime}
+        select * from record where c_name = #{counselorName} and starttime between #{startDate} and #{endDate}
     </select>
     <!--查找满足所有条件的咨询记录-->
     <select id="findAllRecordByAll" resultType="com.example.demo.domain.Record">
-        select * from record where v_name = #{visitorName} and c_name = #{counselorName} and starttime between #{startTime} and #{endTime}
+        select * from record where v_name = #{visitorName} and c_name = #{counselorName} and starttime between #{startDate} and #{endDate}
     </select>
     <!--找到所有与该督导绑定的咨询师的name-->
     <select id="findAllBindByUsername" parameterType="String" resultType="String">
@@ -108,10 +108,20 @@
     </select>
     <!--时间查询-->
     <select id="findAllSelfRecordByTime" resultType="com.example.demo.domain.Record">
-        select * from record where c_name = #{counselorName} and starttime between #{startTime} and #{endTime} limit #{pageNum}, #{pageSize}
+        select * from record where c_name = #{counselorName} and starttime between #{startDate} and #{endDate} limit #{pageNum}, #{pageSize}
     </select>
     <!--所有条件查询-->
     <select id="findAllSelfRecordByAll" resultType="com.example.demo.domain.Record">
-        select * from record where c_name = #{counselorName} and v_name = {visitorName} and starttime between #{startTime} and #{endTime} limit #{pageNum}, #{pageSize}
+        select * from record where c_name = #{counselorName} and v_name = {visitorName} and starttime between #{startDate} and #{endDate} limit #{pageNum}, #{pageSize}
     </select>
+
+    <!--访客查看自己的咨询记录-->
+    <select id="findAllVisitorRecordByPno" resultType="com.example.demo.domain.Record">
+        select * from record where pno = #{pno}
+    </select>
+
+    <!--插入咨询记录-->
+    <insert id="insertRecord" parameterType="com.example.demo.domain.Record">
+        insert into record(c_name, v_name, pno, duration, starttime, level, evaluate) values (#{c_name}, #{v_name}, #{pno}, #{duration}, #{starttime}, #{level}, #{evaluate})
+    </insert>
 </mapper>
