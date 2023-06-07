@@ -170,5 +170,11 @@ public class VisitorController {
         return Result.success();
     }
 
+    //修改密码
+    @PostMapping("/updatePassword/{pno}")
+    public Result updatePassword(@RequestParam String password, @PathVariable String pno){
+        visitorDao.updatePassword(password, pno);
+        return Result.success();
+    }
 
 }

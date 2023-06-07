@@ -38,6 +38,8 @@ public interface ConsultantDao {
     public String findName(String username);
     //返回所有咨询师信息
     //List<Consultant> findAllCounselor();
+    //通过username找到name
+    public String findByUsername(String username);
 
 
 }

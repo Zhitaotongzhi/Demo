@@ -74,7 +74,7 @@
     <select id="findAllBindRecordByName"  resultType="com.example.demo.domain.Record">
         select * from record <where>  <if test="list != null and list.size() > 0">
         AND c_name in <foreach collection="list" item="counselorName" open="(" separator="," close=")">
-        #{counselorame}
+        #{counselorName}
     </foreach>
     </if> and v_name = #{name}
     </where>
@@ -124,4 +124,20 @@
     <insert id="insertRecord" parameterType="com.example.demo.domain.Record">
         insert into record(c_name, v_name, pno, duration, starttime, level, evaluate) values (#{c_name}, #{v_name}, #{pno}, #{duration}, #{starttime}, #{level}, #{evaluate})
     </insert>
+
+    <!--统计当天咨询的总数-->
+    <select id="totalCount" parameterType="String">
+        select count(*) from record where starttime = #{currentDate}
+    </select>
+    <!--统计咨询师当天咨询的总数-->
+    <select id="counselorRecordCount" parameterType="String">
+        select count(*) from record where c_name = #{counselorName} and starttime > #{currentDate}
+    </select>
+    <!--统计今天的咨询总时长-->
+    <select id="totalTimeCount" parameterType="String" resultType="java.sql.Time">
+        select SEC_TO_TIME(sum(TIME_TO_SEC(duration))) from record where starttime > #{currentDate}
+    </select>
+    <select id="counselotTotalTime" resultType="java.sql.Time">
+        select SEC_TO_TIME(sum(TIME_TO_SEC(duration))) from record where  c_name = #{counselorName} and starttime> #{currentDate}
+    </select>
 </mapper>
