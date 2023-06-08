@@ -61,4 +61,8 @@
         select name from worker where username = #{username}
     </select>
 
+    <select id="findAllByIsBusyAndAuthority" resultType="com.example.demo.domain.Consultant">
+        select * from worker where is_online = "1" and authority = "Counselor"
+    </select>
+
 </mapper>

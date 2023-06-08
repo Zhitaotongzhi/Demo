@@ -40,6 +40,7 @@ public interface ConsultantDao {
     //List<Consultant> findAllCounselor();
     //通过username找到name
     public String findByUsername(String username);
+    List<Consultant> findAllByIsBusyAndAuthority(int pageNum, int pageSize);
 
 
 }
