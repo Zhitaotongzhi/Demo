@@ -140,4 +140,8 @@
     <select id="counselotTotalTime" resultType="java.sql.Time">
         select SEC_TO_TIME(sum(TIME_TO_SEC(duration))) from record where  c_name = #{counselorName} and starttime> #{currentDate}
     </select>
+    <!--最近的咨询记录-->
+    <select id="currentRecord" resultType="com.example.demo.domain.Record">
+        select * from record ORDER BY starttime DESC limit #{limit}
+    </select>
 </mapper>

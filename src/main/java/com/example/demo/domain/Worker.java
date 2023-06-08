@@ -16,8 +16,37 @@ public class Worker {
     private String email;
     private String title;
     private String workunit;
+
+    @Override
+    public String toString() {
+        return "Worker{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", authority='" + authority + '\'' +
+                ", gender='" + gender + '\'' +
+                ", name='" + name + '\'' +
+                ", pno='" + pno + '\'' +
+                ", email='" + email + '\'' +
+                ", title='" + title + '\'' +
+                ", workunit='" + workunit + '\'' +
+                ", is_online='" + is_online + '\'' +
+                ", is_Busy='" + is_Busy + '\'' +
+                ", current=" + current +
+                '}';
+    }
+
     private String is_online;
+
+    public int getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(int current) {
+        this.current = current;
+    }
+
     private String is_Busy;
+    private int current;
 
     public String getUsername() {
         return username;
@@ -107,20 +136,4 @@ public class Worker {
         this.is_Busy = is_Busy;
     }
 
-    @Override
-    public String toString() {
-        return "Worker{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", authority='" + authority + '\'' +
-                ", gender='" + gender + '\'' +
-                ", name='" + name + '\'' +
-                ", pno='" + pno + '\'' +
-                ", email='" + email + '\'' +
-                ", title='" + title + '\'' +
-                ", workunit='" + workunit + '\'' +
-                ", is_online='" + is_online + '\'' +
-                ", is_Busy='" + is_Busy + '\'' +
-                '}';
-    }
 }

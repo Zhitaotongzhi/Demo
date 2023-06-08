@@ -19,12 +19,40 @@ public class Supervisor {
     private String title;
     private String workunit;
 
+    public int getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(int current) {
+        this.current = current;
+    }
+
+    private int current;
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return "Supervisor{" +
+                "username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
+                ", pno='" + pno + '\'' +
+                ", email='" + email + '\'' +
+                ", status='" + status + '\'' +
+                ", authority='" + authority + '\'' +
+                ", is_online=" + is_online +
+                ", title='" + title + '\'' +
+                ", workunit='" + workunit + '\'' +
+                ", current=" + current +
+                '}';
     }
 
     public String getName() {

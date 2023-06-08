@@ -122,5 +122,29 @@ public class ConsultantController {
         consultantDao.updateConIsFree(username);
         return Result.success();
     }
-
+    //Web首页显示所有在线的咨询师
+    @GetMapping("/onlineList")
+    public Result ShowIsOnline(@RequestParam String pageNum, @RequestParam String pageSize){
+        int i = Integer.parseInt(pageNum);
+        int j = Integer.parseInt(pageSize);
+        List<Consultant> consultants = consultantDao.findAllByIsBusyAndAuthority((i - 1) * j, j);
+        long total = consultants.size();
+        Map<String, Object> counselor = new HashMap<>();
+        counselor.put("total", total);
+        counselor.put("counselors", consultants);
+        return Result.success(counselor);
+    }
+    //更新咨询师当前的咨询数量
+    @GetMapping("/addCurrent/{username}")
+    public void updateCurrent(@PathVariable String username){
+        consultantDao.updateConIsBusy(username);
+    }
+    //正在进行的咨询数
+    @GetMapping
+    public Result total(){
+        int total = consultantDao.consultCount();
+        Map<String, Object> totals = new HashMap<>();
+        totals.put("total", total);
+        return Result.success(totals);
+    }
 }

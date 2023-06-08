@@ -42,7 +42,11 @@
     </select>
 
     <update id="updateConIsBusy">
-        update worker set is_Busy = "busy" where username = #{username}
+        update worker set is_Busy = "busy" and current = current + 1 where username = #{username}
+    </update>
+
+    <update id="updateCurrent">
+        update worker set current = current - 1 where username = #{username}
     </update>
 
     <update id="updateConIsFree">
@@ -63,6 +67,20 @@
 
     <select id="findAllByIsBusyAndAuthority" resultType="com.example.demo.domain.Consultant">
         select * from worker where is_online = "1" and authority = "Counselor"
+    </select>
+
+    <select id="isBusyCount" resultType="int">
+        select count(1) from worker where authority = "Counselor" and is_Busy = "busy"
+    </select>
+
+    <!--统计正在进行的咨询数量-->
+    <select id="consultCount">
+        select sum(current) from worker where authority = "Counselor" and is_online = "1"
+    </select>
+
+    <!--督导查看在线的咨询师-->
+    <select id="findAllBindIsOnline" resultType="com.example.demo.domain.Consultant">
+        select * from worker where bind_username = #{username} and is_online = "1" limit #{pageNum}, #{pageSize}
     </select>
 
 </mapper>

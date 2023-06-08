@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.*;
 import com.example.demo.dao.AdminDao;
+import com.example.demo.dao.ConsultantDao;
 import com.example.demo.dao.SupervisorDao;
+import com.example.demo.domain.Consultant;
 import com.example.demo.domain.Supervisor;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.SupervisorService;
@@ -30,6 +32,9 @@ public class SupervisorController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private ConsultantDao consultantDao;
 
     //查看督导列表
     @GetMapping("/list")
@@ -126,5 +131,18 @@ public class SupervisorController {
     public Result updateSupervisor(@RequestBody Supervisor supervisor){
         supervisorDao.updeteSupervisorByUsername(supervisor);
         return Result.success();
+    }
+
+    //督导查看在线咨询师列表
+    @GetMapping("/onlineList/{username}")
+    public Result onlineList(@PathVariable String username, @RequestParam String pageNum, @RequestParam String pageSize){
+        int i = Integer.parseInt(pageNum);
+        int j = Integer.parseInt(pageSize);
+        List<Consultant> counselors = consultantDao.findAllBindIsOnline((i - 1) * j, j, username);
+        long total = counselors.size();
+        Map<String, Object> counselor = new HashMap<>();
+        counselor.put("total", total);
+        counselor.put("counselors", counselors);
+        return Result.success(counselor);
     }
 }

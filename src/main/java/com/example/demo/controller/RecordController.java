@@ -246,4 +246,12 @@ public class RecordController {
         totals.put("total", total);
         return Result.success(totals);
     }
+    //显示最近的咨询记录
+    @GetMapping("/currentRecords")
+    public Result currentRecord(){
+        List<Record> records = recordDao.currentRecord(5);
+        Map<String, Object> record = new HashMap<>();
+        record.put("records", records);
+        return Result.success(record);
+    }
 }

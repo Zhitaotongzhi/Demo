@@ -40,7 +40,12 @@ public interface ConsultantDao {
     //List<Consultant> findAllCounselor();
     //通过username找到name
     public String findByUsername(String username);
+    //找到在线的咨询师
     List<Consultant> findAllByIsBusyAndAuthority(int pageNum, int pageSize);
-
-
+    //找到正在进行的咨询的总数
+    int consultCount();
+    //更新当前正在进行的咨询数量
+    public void updateCurrent(String username);
+    //督导查看与自己绑定的在线的咨询师
+    List<Consultant> findAllBindIsOnline(int pageNum, int pageSize, String username);
 }

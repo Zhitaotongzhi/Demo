@@ -63,5 +63,7 @@ public interface RecordDao {
     //统计今天总咨询时长
     public Date totalTimeCount(String currentDate);
     public Date counselotTotalTime(String counselorName, String currentDate);
+    //显示最近的咨询记录
+    List<Record> currentRecord(int limit);
 
 }

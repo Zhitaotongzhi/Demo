@@ -24,6 +24,15 @@ public class Consultant {
     private int is_online;
     private int limit;
     private int orderNumber;
+    private int current;
+
+    public int getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(int current) {
+        this.current = current;
+    }
 
     public String getIs_Busy() {
         return is_Busy;
@@ -53,6 +62,7 @@ public class Consultant {
                 ", is_online=" + is_online +
                 ", limit=" + limit +
                 ", orderNumber=" + orderNumber +
+                ", current=" + current +
                 ", is_Busy='" + is_Busy + '\'' +
                 '}';
     }
