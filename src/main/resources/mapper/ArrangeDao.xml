@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.ArrangeDao">
+    <!--挑选某年某月某日咨询师值班的信息-->
+    <select id="selectCounselorArrangeByDate" resultType="com.example.demo.domain.ArrangeElement" parameterType="String">
+        SELECT w_username, w_name FROM schedule WHERE date = #{date} and authority = "Counselor"
+    </select>
+
+    <!--挑选某年某月某日督导值班的信息-->
+    <select id="selectSupervisorArrangeByDate" resultType="com.example.demo.domain.ArrangeElement" parameterType="String">
+        SELECT w_username, w_name FROM schedule WHERE date = #{date} and authority = "Supervisor"
+    </select>
+
+    <!--新增督导值班-->
+    <insert id="insertSupervisorArrange" parameterType="String">
+        insert into schedule(w_username, w_name, date, authority) values (#{w_username},#{w_name},#{date},"Supervisor")
+    </insert>
+
+    <!--新增咨询师值班-->
+    <insert id="insertCounselorArrange" parameterType="String">
+        insert into schedule(w_username, w_name, date, authority) values (#{w_username},#{w_name},#{date},"Counselor")
+    </insert>
+
+    <!--移除督导值班-->
+    <delete id="deleteSupervisorArrange" parameterType="String">
+        delete from schedule where w_username = #{w_username} and w_name = #{w_name} and date = #{date} and authority = "Supervisor"
+    </delete>
+
+    <!--移除咨询师值班-->
+    <delete id="deleteCounselorArrange" parameterType="String">
+        delete from schedule where w_username = #{w_username} and w_name = #{w_name} and date = #{date} and authority = "Counselor"
+    </delete>
+
+    <!--挑选某年某月某日可排班督导-->
+    <select id="selectAvailableSupervisorByDate" resultType="com.example.demo.domain.ArrangeElement" parameterType="String">
+        select name as w_name, username as w_username
+        from worker
+        where authority = "Supervisor" and username not in
+                                           (select w_username from schedule where authority = "Supervisor" and date = #{date})
+    </select>
+
+    <!--挑选某年某月某日可排班咨询师-->
+    <select id="selectAvailableCounselorByDate" resultType="com.example.demo.domain.ArrangeElement" parameterType="String">
+        select name as w_name, username as w_username
+        from worker
+        where authority = "Counselor" and username not in
+                                          (select w_username from schedule where authority = "Counselor" and date = #{date})
+    </select>
+</mapper>
