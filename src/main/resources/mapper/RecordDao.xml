@@ -126,11 +126,11 @@
     </insert>
 
     <!--统计当天咨询的总数-->
-    <select id="totalCount" parameterType="String">
-        select count(*) from record where starttime = #{currentDate}
+    <select id="totalCount" parameterType="String" resultType="int">
+        select count(*) from record where starttime > #{currentDate}
     </select>
     <!--统计咨询师当天咨询的总数-->
-    <select id="counselorRecordCount" parameterType="String">
+    <select id="counselorRecordCount" parameterType="String" resultType="int">
         select count(*) from record where c_name = #{counselorName} and starttime > #{currentDate}
     </select>
     <!--统计今天的咨询总时长-->

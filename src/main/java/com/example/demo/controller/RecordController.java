@@ -7,6 +7,7 @@ import com.example.demo.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -211,8 +212,9 @@ public class RecordController {
     //统计今天总的咨询时长
     @GetMapping("/totalTime")
     public Result totalTime(){
-        Date date = new Date();
-        Date totalTime = recordDao.totalTimeCount("2023-06-06");
+        LocalDate date = LocalDate.now();
+        System.out.println(date.toString());
+        Date totalTime = recordDao.totalTimeCount(date.toString());
         Map<String, Object> total = new HashMap<>();
         total.put("totalTime", totalTime);
         return Result.success(total);
@@ -220,7 +222,7 @@ public class RecordController {
     //咨询师今日咨询总时长
     @GetMapping("/counselorTotalTime/{username}")
     public Result conTotalTime(@PathVariable String username){
-        Date date = new Date();
+        LocalDate date = LocalDate.now();
         String name = consultantDao.findByUsername(username);
         Date totalTime = recordDao.counselotTotalTime(name, date.toString());
         Map<String, Object> total = new HashMap<>();
@@ -230,7 +232,7 @@ public class RecordController {
     //今日统计总数
     @GetMapping("/totalCount")
     public Result totalCount(){
-        Date date = new Date();
+        LocalDate date = LocalDate.now();
         int total = recordDao.totalCount(date.toString());
         Map<String, Object> totals = new HashMap<>();
         totals.put("total", total);
@@ -239,7 +241,7 @@ public class RecordController {
     //咨询师今日咨询总数
     @GetMapping("/counselorTotalCount/{username}")
     public Result conTotalCount(@PathVariable String username){
-        Date date = new Date();
+        LocalDate date = LocalDate.now();
         String counselorName = consultantDao.findName(username);
         int total = recordDao.counselorRecordCount(counselorName, date.toString());
         Map<String, Object> totals = new HashMap<>();

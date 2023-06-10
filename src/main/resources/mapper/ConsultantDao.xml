@@ -53,7 +53,7 @@
         update worker set is_Busy = "free" where username = #{username}
     </update>
 
-    <select id="findName" parameterType="String">
+    <select id="findName" parameterType="String" resultType="String">
         select name from worker where username = #{username} and authority = "Counselor"
     </select>
 
