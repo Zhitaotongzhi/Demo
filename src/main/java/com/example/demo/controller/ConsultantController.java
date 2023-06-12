@@ -54,17 +54,6 @@ public class ConsultantController {
         }
     }
 
-    /*//新注册咨询师
-    @PostMapping("/insert")
-    public Result addCounselor(@RequestBody Consultant consultant){
-        boolean flag = adminService.regConsultant(consultant);
-        if(flag){
-            return Result.success();
-        }else{
-            return Result.failure("20005","用户已存在");
-        }
-    }*/
-
     //完整返回信息的注册咨询师
     @PostMapping("/insert")
     public Result addConsultant(@RequestBody Consultant consultant){
@@ -137,10 +126,14 @@ public class ConsultantController {
     //更新咨询师当前的咨询数量
     @GetMapping("/addCurrent/{username}")
     public void updateCurrent(@PathVariable String username){
-        consultantDao.updateConIsBusy(username);
+        consultantDao.addCurrent(username);
+    }
+    @GetMapping("/subCurrent/{username}")
+    public void subCurrent(@PathVariable String username){
+        consultantDao.subCurrent(username);
     }
     //正在进行的咨询数
-    @GetMapping
+    @GetMapping("/consultCount")
     public Result total(){
         int total = consultantDao.consultCount();
         Map<String, Object> totals = new HashMap<>();

@@ -42,10 +42,10 @@
     </select>
 
     <update id="updateConIsBusy">
-        update worker set is_Busy = "busy" and current = current + 1 where username = #{username}
+        update worker set is_Busy = "busy" where username = #{username}
     </update>
 
-    <update id="updateCurrent">
+    <update id="subCurrent">
         update worker set current = current - 1 where username = #{username}
     </update>
 
@@ -82,5 +82,7 @@
     <select id="findAllBindIsOnline" resultType="com.example.demo.domain.Consultant">
         select * from worker where bind_username = #{username} and is_online = "1" limit #{pageNum}, #{pageSize}
     </select>
-
+    <update id="addCurrent">
+        update worker set current = current + 1 where username = #{username}
+    </update>
 </mapper>

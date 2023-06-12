@@ -33,29 +33,6 @@ public class VisitorController {
     @Autowired
     private VisitorDao visitorDao;
 
-    /*@RequestMapping("/tologin")
-    public String login(){
-        return "Login";
-    }
-    @RequestMapping("/result")
-    public String login(HttpServletRequest request, HttpServletResponse response){
-        //前端获取数据
-        String name = request.getParameter("name");
-        String pno = request.getParameter("pno");
-
-        //接受前端数据
-        Visitor visitor = new Visitor();
-        visitor.setName(name);
-        visitor.setPno(pno);
-
-        //调用service层方法
-        boolean login = visitorService.login(visitor);
-        if(login == true){
-            return "Success";
-        }else{
-            return "Login";
-        }
-    }*/
     //登录
     @PostMapping("/login")
     public Result visitorLogin(@RequestBody Visitor visitor){
@@ -104,8 +81,7 @@ public class VisitorController {
         }
     }
 
-
-
+    //访客列表
     @GetMapping("/list")
     public Result visitorList(@RequestParam String pageNum,@RequestParam String pageSize,@RequestParam String search){
         int i = Integer.parseInt(pageNum);
@@ -126,36 +102,7 @@ public class VisitorController {
             return Result.success(visitor);
         }
     }
-
-    /*@GetMapping("/reg")
-    public String reg(){
-        return "Reg";
-    }
-    @GetMapping("/end")
-    public String end(HttpServletRequest request, HttpServletResponse response){
-        //获取前端数据
-        String name = request.getParameter("name");
-        String phonenumber = request.getParameter("phonenumber");
-        String contact_name = request.getParameter("contect_name");
-        String contact_pno = request.getParameter("contact_pno");
-        //接收数据
-        Visitor visitor = new Visitor();
-
-        visitor.setName(name);
-        visitor.setPno(phonenumber);
-        visitor.setContact_name(contact_name);
-        visitor.setContact_pno(contact_pno);
-
-        System.out.println("插入数据！");
-
-        boolean flag = visitorService.reg(visitor);
-        if(flag){
-            return "END1";
-        }else{
-            return "END2";
-        }
-    }*/
-
+    //禁用启用
     @PatchMapping("/banned/{pno}")
     public Result bannedVisitor(@PathVariable String pno){
         Visitor visitor = adminDao.selectByPno(pno);

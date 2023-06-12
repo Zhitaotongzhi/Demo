@@ -45,7 +45,10 @@ public interface ConsultantDao {
     //找到正在进行的咨询的总数
     int consultCount();
     //更新当前正在进行的咨询数量
-    public void updateCurrent(String username);
+    public void subCurrent(String username);
+    public void addCurrent(String username);
     //督导查看与自己绑定的在线的咨询师
     List<Consultant> findAllBindIsOnline(int pageNum, int pageSize, String username);
+    //结束咨询减少咨询师正在进行咨询的数量给
+    public void deleteCurrent(String username);
 }
