@@ -145,4 +145,10 @@ public class SupervisorController {
         counselor.put("counselors", counselors);
         return Result.success(counselor);
     }
+    //删除督导
+    @GetMapping("/delete/{username}")
+    public Result deleteSup(@PathVariable String username){
+        supervisorDao.deleteSupervisor(username);
+        return Result.success();
+    }
 }

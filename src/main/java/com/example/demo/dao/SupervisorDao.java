@@ -28,4 +28,6 @@ public interface SupervisorDao {
     public void updeteSupervisorByUsername(Supervisor supervisor);
     //找到所有督导
     //List<Supervisor> findAllSupervisor();
+    //删除督导
+    public void deleteSupervisor(String username);
 }

@@ -144,4 +144,8 @@
     <select id="currentRecord" resultType="com.example.demo.domain.Record">
         select * from record ORDER BY starttime DESC limit #{limit}
     </select>
+    <!--正在进行的咨询数量-->
+    <select id="currentCount" resultType="long">
+        select sum(current) from worker where authority = "Counselor"
+    </select>
 </mapper>

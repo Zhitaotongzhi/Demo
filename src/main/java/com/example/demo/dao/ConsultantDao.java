@@ -51,4 +51,8 @@ public interface ConsultantDao {
     List<Consultant> findAllBindIsOnline(int pageNum, int pageSize, String username);
     //结束咨询减少咨询师正在进行咨询的数量给
     public void deleteCurrent(String username);
+    //删除咨询师
+    public void deleteCounselor(String username);
+    //为咨询师绑定督导
+    public void bindSupForCounselor(String name, String supervisorUsername, String counselorUsername);
 }

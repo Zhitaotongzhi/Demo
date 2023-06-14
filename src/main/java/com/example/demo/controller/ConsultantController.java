@@ -140,4 +140,10 @@ public class ConsultantController {
         totals.put("total", total);
         return Result.success(totals);
     }
+    //删除咨询师
+    @GetMapping("/deleteCounselor/{username}")
+    public Result delete(@PathVariable String username){
+        consultantDao.deleteCounselor(username);
+        return Result.success();
+    }
 }

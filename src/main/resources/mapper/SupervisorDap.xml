@@ -37,4 +37,8 @@
     <!--<select id="findAllSupervisor" resultType="com.example.demo.domain.Supervisor">
         select * from worker where authority = "Supervisor"
     </select>-->
+    <!--删除所有督导-->
+    <delete id="deleteSupervisor">
+        delete from worker where username = #{username}
+    </delete>
 </mapper>

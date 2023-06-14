@@ -66,7 +66,7 @@
     </select>
 
     <select id="findAllByIsBusyAndAuthority" resultType="com.example.demo.domain.Consultant">
-        select * from worker where is_online = "1" and authority = "Counselor"
+        select * from worker where is_online = "1" and authority = "Counselor" limit #{pageNum}, #{pageSize}
     </select>
 
     <select id="isBusyCount" resultType="int">
@@ -84,5 +84,13 @@
     </select>
     <update id="addCurrent">
         update worker set current = current + 1 where username = #{username}
+    </update>
+    <!--删除咨询师-->
+    <delete id="deleteCounselor">
+        delete from worker where username = #{username}
+    </delete>
+    <!--绑定-->
+    <update id="bindSupForCounselor">
+        update worker set bind_name = #{name}, bind_username = #{supervisorUsername} where username = #{counselorUsername}
     </update>
 </mapper>

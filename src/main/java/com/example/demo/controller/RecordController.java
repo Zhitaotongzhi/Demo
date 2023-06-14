@@ -256,4 +256,12 @@ public class RecordController {
         record.put("records", records);
         return Result.success(record);
     }
+    //正在进行的咨询总数
+    @GetMapping("/currentCount")
+    public Result currentCount(){
+        long total = recordDao.currentCount();
+        Map<String, Object> count = new HashMap<>();
+        count.put("total", total);
+        return Result.success(count);
+    }
 }
