@@ -147,7 +147,7 @@ public class ConsultantController {
         return Result.success();
     }
     //一个咨询师正在进行的咨询总数
-    @GetMapping("/currentCount/{username")
+    @GetMapping("/currentCount/{username}")
     public Result currentCount(@PathVariable String username){
         consultantDao.currentCon(username);
         return Result.success();
