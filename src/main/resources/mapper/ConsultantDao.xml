@@ -93,4 +93,8 @@
     <update id="bindSupForCounselor">
         update worker set bind_name = #{name}, bind_username = #{supervisorUsername} where username = #{counselorUsername}
     </update>
+    <!--一个咨询师现在正在进行的咨询数量-->
+    <select id="currentCon" resultType="int">
+        select current from worker where username = #{username}
+    </select>
 </mapper>

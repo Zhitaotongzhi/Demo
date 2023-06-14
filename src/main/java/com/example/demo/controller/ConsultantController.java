@@ -133,17 +133,24 @@ public class ConsultantController {
         consultantDao.subCurrent(username);
     }
     //正在进行的咨询数
-    @GetMapping("/consultCount")
+    /*@GetMapping("/consultCount")
     public Result total(){
         int total = consultantDao.consultCount();
         Map<String, Object> totals = new HashMap<>();
         totals.put("total", total);
         return Result.success(totals);
-    }
+    }*/
     //删除咨询师
     @GetMapping("/deleteCounselor/{username}")
     public Result delete(@PathVariable String username){
         consultantDao.deleteCounselor(username);
         return Result.success();
     }
+    //一个咨询师正在进行的咨询总数
+    @GetMapping("/currentCount/{username")
+    public Result currentCount(@PathVariable String username){
+        consultantDao.currentCon(username);
+        return Result.success();
+    }
+
 }

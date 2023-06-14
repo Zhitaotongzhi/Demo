@@ -55,4 +55,6 @@ public interface ConsultantDao {
     public void deleteCounselor(String username);
     //为咨询师绑定督导
     public void bindSupForCounselor(String name, String supervisorUsername, String counselorUsername);
+    //一个咨询师正在进行的咨询数量
+    int currentCon(String username);
 }
