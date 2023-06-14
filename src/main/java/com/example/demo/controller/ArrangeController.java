@@ -97,4 +97,13 @@ public class ArrangeController {
         available.put("availableCounselorData", availableCounselorList);
         return Result.success(available);
     }
+
+    @GetMapping("/schedule")
+    public Result getOwnSchedule(@RequestParam String name){
+        String month = "6";
+        List<String> dateList = arrangeDao.selectSchedule(name, month);
+        Map<String, Object> available = new HashMap<>();
+        available.put("dateList", dateList);
+        return Result.success(available);
+    }
 }

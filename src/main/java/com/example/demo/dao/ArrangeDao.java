@@ -24,4 +24,6 @@ public interface ArrangeDao {
     public List<ArrangeElement> selectAvailableSupervisorByDate(String date);
 
     public List<ArrangeElement> selectAvailableCounselorByDate(String date);
+
+    public List<String> selectSchedule(String w_username, String month);
 }

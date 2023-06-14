@@ -47,4 +47,11 @@
         where authority = "Counselor" and username not in
                                           (select w_username from schedule where authority = "Counselor" and date = #{date})
     </select>
+
+    <!--挑选某月某人的值班详情-->
+    <select id="selectSchedule" resultType="String" parameterType="String">
+        select date
+        from schedule
+        where w_username = #{w_username} and MONTH(date) = #{month}
+    </select>
 </mapper>
