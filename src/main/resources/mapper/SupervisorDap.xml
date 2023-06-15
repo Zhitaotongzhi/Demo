@@ -41,4 +41,15 @@
     <delete id="deleteSupervisor">
         delete from worker where username = #{username}
     </delete>
+    <!--正在进行的求助数-->
+    <select id="assistCount" resultType="int">
+        select sum(current) from worker where authority = "Supervisor"
+    </select>
+    <!--找到在线的咨询师列表-->
+    <select id="findAllSupIsonline" resultType="com.example.demo.domain.Supervisor">
+        select * from worker where authority = "Supervisor" and is_online = "1"
+    </select>
+    <select id="onLineCount" resultType="long">
+        select count(*) from worker where is_online = "1" and authority = "Supervisor" and status = "normal"
+    </select>
 </mapper>

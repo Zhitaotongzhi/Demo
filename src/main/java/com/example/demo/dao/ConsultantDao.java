@@ -57,4 +57,18 @@ public interface ConsultantDao {
     public void bindSupForCounselor(String name, String supervisorUsername, String counselorUsername);
     //一个咨询师正在进行的咨询数量
     int currentCon(String username);
+    //通过用户名返回忙闲状态
+    public String findStatus(String username);
+    //结束咨询咨询师今日咨询数量加
+    public void addOrder(String username);
+    //Web端找到在线的咨询师数量
+    long onLineConCount();
+
+    //咨询师首页功能
+    //咨询师综合评分
+    public String avgLevel(String username);
+    //咨询师总咨询数量
+    public int totalCount(String username);
+    //今日咨询数
+
 }

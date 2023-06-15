@@ -122,7 +122,7 @@
 
     <!--插入咨询记录-->
     <insert id="insertRecord" parameterType="com.example.demo.domain.Record">
-        insert into record(c_name, v_name, pno, duration, starttime, level, evaluate) values (#{c_name}, #{v_name}, #{pno}, #{duration}, #{starttime}, #{level}, #{evaluate})
+        insert into record(c_name, v_name, pno, duration, starttime, level, evaluate, c_username) values (#{c_name}, #{v_name}, #{pno}, #{duration}, #{starttime}, #{level}, #{evaluate}, #{c_username})
     </insert>
 
     <!--统计当天咨询的总数-->

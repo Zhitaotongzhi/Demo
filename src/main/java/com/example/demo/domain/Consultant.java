@@ -26,6 +26,16 @@ public class Consultant {
     private int orderNumber;
     private int current;
 
+    private int totalOrder;
+
+    public int getTotalOrder() {
+        return totalOrder;
+    }
+
+    public void setTotalOrder(int totalOrder) {
+        this.totalOrder = totalOrder;
+    }
+
     public int getCurrent() {
         return current;
     }
@@ -63,6 +73,7 @@ public class Consultant {
                 ", limit=" + limit +
                 ", orderNumber=" + orderNumber +
                 ", current=" + current +
+                ", totalOrder=" + totalOrder +
                 ", is_Busy='" + is_Busy + '\'' +
                 '}';
     }

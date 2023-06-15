@@ -213,7 +213,6 @@ public class RecordController {
     @GetMapping("/totalTime")
     public Result totalTime(){
         LocalDate date = LocalDate.now();
-        System.out.println(date.toString());
         Date totalTime = recordDao.totalTimeCount(date.toString());
         Map<String, Object> total = new HashMap<>();
         total.put("totalTime", totalTime);

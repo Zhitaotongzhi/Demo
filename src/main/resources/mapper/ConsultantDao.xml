@@ -10,11 +10,11 @@
     </select>
 
     <select id="findAllConsultantCountNoName" resultType="long">
-        select count(1) from worker where authority = "Conselor"
+        select count(*) from worker where authority = "Counselor"
     </select>
 
     <select id="findAllCountCount" resultType="long">
-        select count(1) from worker where name = #{search} and authority = "Conselor"
+        select count(1) from worker where name = #{search} and authority = "Counselor"
     </select>
 
     <update id="bannedCounselor" parameterType="String">
@@ -96,5 +96,26 @@
     <!--一个咨询师现在正在进行的咨询数量-->
     <select id="currentCon" resultType="int">
         select current from worker where username = #{username}
+    </select>
+    <!--返回忙闲状态-->
+    <select id="findStatus" resultType="String">
+        select is_Busy from worker where username = #{username}
+    </select>
+    <!--结束咨询时咨询师今日咨询数量加一-->
+    <update id="addOrder">
+        update worker set orderNumber = orderNumber + 1 where username = #{username}
+    </update>
+    <!--在线咨询师数量-->
+    <select id="onLineConCount" resultType="long">
+        select count(*) from worker where is_online = "1" and authority = "Counselor" and status = "normal"
+    </select>
+    <!--咨询师个人首页-->
+    <!--平均评分-->
+    <select id="avgLevel" resultType="String">
+        select avg(level) from record where c_username = #{username}
+    </select>
+    <!--总咨询数-->
+    <select id="totalCount" resultType="int">
+        select totalOrder from worker where username = #{username}
     </select>
 </mapper>

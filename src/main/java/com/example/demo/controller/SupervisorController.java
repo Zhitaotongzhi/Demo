@@ -151,4 +151,25 @@ public class SupervisorController {
         supervisorDao.deleteSupervisor(username);
         return Result.success();
     }
+    //正在进行的求助数
+    @GetMapping("/assistCount")
+    public Result assistCount(){
+        int total = supervisorDao.assistCount();
+        Map<String, Object> map = new HashMap<>();
+        map.put("total", total);
+        return Result.success(map);
+    }
+    //在线的读到列表
+    @GetMapping("/onlineList")
+    public Result showOnlineSup(@RequestParam String pageNum, @RequestParam String pageSize){
+        int i = Integer.parseInt(pageNum);
+        int j = Integer.parseInt(pageSize);
+        List<Supervisor> list = supervisorDao.findAllSupIsonline((i - 1) * j, j);
+        long total = supervisorDao.onLineCount();
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("total", total);
+        maps.put("supervisors", list);
+        return Result.success(maps);
+    }
+
 }

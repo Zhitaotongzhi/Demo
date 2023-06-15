@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import com.example.demo.dao.AdminDao;
+import com.example.demo.dao.RecordDao;
 import com.example.demo.utils.JwtUtil;
 import com.example.demo.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +35,9 @@ public class ConsultantController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private RecordDao recordDao;
+
     //查询咨询师列表
     @GetMapping("/list")
     public Result conselorList(@RequestParam String pageNum, @RequestParam String pageSize, @RequestParam String search){
@@ -40,6 +46,7 @@ public class ConsultantController {
         if(search.isEmpty()){
             List<Consultant> list = consultantDao.findAllConsultantByAuthorityNoName((i - 1) * j, j);
             long total = consultantDao.findAllConsultantCountNoName();
+            System.out.println(total);
             Map<String, Object> counselor = new HashMap<>();
             counselor.put("total",total);
             counselor.put("Counselors",list);
@@ -101,13 +108,13 @@ public class ConsultantController {
         return Result.success(counselor);
     }
     //更新忙闲状态
-    @PostMapping("/updateIsBusy")
-    public Result updateIsBusy(@RequestParam String username){
+    @PostMapping("/updateIsBusy/{username}")
+    public Result updateIsBusy(@PathVariable String username){
         consultantDao.updateConIsBusy(username);
         return Result.success();
     }
-    @PostMapping("/updateIsFree")
-    public Result updateIsFree(@RequestParam String username){
+    @PostMapping("/updateIsFree/{username}")
+    public Result updateIsFree(@PathVariable String username){
         consultantDao.updateConIsFree(username);
         return Result.success();
     }
@@ -117,7 +124,7 @@ public class ConsultantController {
         int i = Integer.parseInt(pageNum);
         int j = Integer.parseInt(pageSize);
         List<Consultant> consultants = consultantDao.findAllByIsBusyAndAuthority((i - 1) * j, j);
-        long total = consultants.size();
+        long total = consultantDao.onLineConCount();
         Map<String, Object> counselor = new HashMap<>();
         counselor.put("total", total);
         counselor.put("counselors", consultants);
@@ -131,7 +138,9 @@ public class ConsultantController {
     @GetMapping("/subCurrent/{username}")
     public void subCurrent(@PathVariable String username){
         consultantDao.subCurrent(username);
+        consultantDao.addOrder(username);
     }
+
     //正在进行的咨询数
     /*@GetMapping("/consultCount")
     public Result total(){
@@ -151,6 +160,46 @@ public class ConsultantController {
     public Result currentCount(@PathVariable String username){
         consultantDao.currentCon(username);
         return Result.success();
+    }
+
+
+    //咨询师个人首页信息
+    //平均评分
+    @GetMapping("/avgLevel/{username}")
+    public Result avgLevel(@PathVariable String username){
+        String avgLevel = consultantDao.avgLevel(username);
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("avgLevel", avgLevel);
+        return Result.success(maps);
+    }
+
+    //总咨询数
+    @GetMapping("/totalOrder/{username}")
+    public Result totalOrder(@PathVariable String username){
+        int totalOrder = consultantDao.totalCount(username);
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("totalOrder", totalOrder);
+        return Result.success(maps);
+    }
+
+    //今日的咨询数
+    @GetMapping("/todayCount/{username}")
+    public Result todayCount(@PathVariable String username){
+        LocalDate date = LocalDate.now();
+        int todayCount = recordDao.counselorRecordCount(username, date.toString());
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("todayCount", todayCount);
+        return Result.success(maps);
+    }
+
+    //今日咨询总时长
+    @GetMapping("/todayTime/{username}")
+    public Result todayTime(@PathVariable String username){
+        LocalDate date = LocalDate.now();
+        Date todayTime = recordDao.counselotTotalTime(username, date.toString());
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("todayTime", todayTime);
+        return Result.success(maps);
     }
 
 }

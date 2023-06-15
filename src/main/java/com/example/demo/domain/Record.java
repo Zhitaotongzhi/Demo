@@ -14,6 +14,15 @@ public class Record {
     private String evaluate;
     private String rid;
     private String pno;
+    private String c_username;
+
+    public String getC_username() {
+        return c_username;
+    }
+
+    public void setC_username(String c_username) {
+        this.c_username = c_username;
+    }
 
     public String getV_name() {
         return v_name;
@@ -90,6 +99,7 @@ public class Record {
                 ", evaluate='" + evaluate + '\'' +
                 ", rid='" + rid + '\'' +
                 ", pno='" + pno + '\'' +
+                ", c_username='" + c_username + '\'' +
                 '}';
     }
 }

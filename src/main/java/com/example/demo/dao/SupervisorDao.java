@@ -30,4 +30,9 @@ public interface SupervisorDao {
     //List<Supervisor> findAllSupervisor();
     //删除督导
     public void deleteSupervisor(String username);
+    //正在进行的求助数
+    public int assistCount();
+    //在线的督导列表
+    List<Supervisor> findAllSupIsonline(int pageNum, int pageSize);
+    long onLineCount();
 }
