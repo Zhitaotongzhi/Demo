@@ -134,6 +134,7 @@ public class ConsultantController {
     @GetMapping("/addCurrent/{username}")
     public void updateCurrent(@PathVariable String username){
         consultantDao.addCurrent(username);
+        consultantDao.updatetotalOrder(username);
     }
     @GetMapping("/subCurrent/{username}")
     public void subCurrent(@PathVariable String username){
@@ -141,14 +142,6 @@ public class ConsultantController {
         consultantDao.addOrder(username);
     }
 
-    //正在进行的咨询数
-    /*@GetMapping("/consultCount")
-    public Result total(){
-        int total = consultantDao.consultCount();
-        Map<String, Object> totals = new HashMap<>();
-        totals.put("total", total);
-        return Result.success(totals);
-    }*/
     //删除咨询师
     @GetMapping("/deleteCounselor/{username}")
     public Result delete(@PathVariable String username){
@@ -201,5 +194,4 @@ public class ConsultantController {
         maps.put("todayTime", todayTime);
         return Result.success(maps);
     }
-
 }

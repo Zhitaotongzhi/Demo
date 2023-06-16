@@ -118,4 +118,12 @@
     <select id="totalCount" resultType="int">
         select totalOrder from worker where username = #{username}
     </select>
+    <!--正在进行的咨询数量-->
+    <select id="currentCount" resultType="int">
+        select current from worker where username = #{username}
+    </select>
+    <!--更新某一位咨询师的总咨询数-->
+    <update id="updatetotalOrder">
+        update worker set totalOrder = totalOrder + 1 where username = #{username}
+    </update>
 </mapper>

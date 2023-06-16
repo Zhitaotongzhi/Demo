@@ -69,6 +69,9 @@ public interface ConsultantDao {
     public String avgLevel(String username);
     //咨询师总咨询数量
     public int totalCount(String username);
-    //今日咨询数
+    //正在进行的咨询数量
+    public int currentCount(String username);
+    //总咨询数加一
+    public void updatetotalOrder(String username);
 
 }

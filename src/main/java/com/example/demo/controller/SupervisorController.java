@@ -159,7 +159,7 @@ public class SupervisorController {
         map.put("total", total);
         return Result.success(map);
     }
-    //在线的读到列表
+    //在线的督导列表
     @GetMapping("/onlineList")
     public Result showOnlineSup(@RequestParam String pageNum, @RequestParam String pageSize){
         int i = Integer.parseInt(pageNum);
