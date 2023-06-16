@@ -4,6 +4,9 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import com.example.demo.dao.AdminDao;
 import com.example.demo.dao.RecordDao;
+import com.example.demo.dao.SupervisorDao;
+import com.example.demo.domain.Arrange;
+import com.example.demo.domain.Supervisor;
 import com.example.demo.utils.JwtUtil;
 import com.example.demo.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +36,8 @@ public class ConsultantController {
     @Autowired
     private AdminDao adminDao;
 
+    @Autowired
+    private SupervisorDao supervisorDao;
     @Autowired
     private AdminService adminService;
 
@@ -193,5 +199,25 @@ public class ConsultantController {
         Map<String, Object> maps = new HashMap<>();
         maps.put("todayTime", todayTime);
         return Result.success(maps);
+    }
+
+    //查询咨询师绑定的督导
+    @GetMapping("/boundSupervisor")
+    public Result bound(@RequestParam String username){
+        Consultant consultant = consultantDao.selectCounselor(username);
+        Map<String, Object> boundSupervisorDetails = new HashMap<>();
+        List<Consultant> consultants = new ArrayList<>();
+        Supervisor supervisor = supervisorDao.selectSupervisorByUsername(consultant.getBind_username());
+        if(supervisor.getIs_online()==1){
+            consultants.add(consultant);
+            boundSupervisorDetails.put("total",consultants.size());
+            boundSupervisorDetails.put("consultants",consultants);
+        }else {
+            boundSupervisorDetails.put("total",0);
+            boundSupervisorDetails.put("consultants",consultants);
+        }
+//        boundSupervisorDetails.put("boundSupervisorUsername", consultant.getBind_username());
+//        boundSupervisorDetails.put("boundSupervisorName", consultant.getBind_name());
+        return Result.success(boundSupervisorDetails);
     }
 }

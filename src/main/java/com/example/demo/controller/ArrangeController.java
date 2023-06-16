@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import com.example.demo.dao.ArrangeDao;
 import com.example.demo.domain.Arrange;
+import com.example.demo.domain.ArrangeArray;
 import com.example.demo.domain.ArrangeElement;
 import com.example.demo.domain.Consultant;
 import com.example.demo.service.ArrangeService;
@@ -52,19 +53,33 @@ public class ArrangeController {
     }
 
     @PostMapping("/insertSupervisor")
-    public Result addSupervisor(@RequestParam String date, @RequestBody ArrangeElement[] supervisors){
-        int num = supervisors.length;
-        for(int i = 0; i < num; i++){
-            arrangeDao.insertSupervisorArrange(date, supervisors[i].getW_name(), supervisors[i].getW_username());
+    public Result addSupervisor( @RequestBody ArrangeArray supervisors){
+        String[] dates = supervisors.getDates();
+        ArrangeElement[] workers = supervisors.getWorkers();
+        for(int i = 0; i < dates.length; i++){
+            for (int j=0 ; j< workers.length; j++){
+                ArrangeElement worker = workers[j];
+                List<String> scheduledDates = arrangeDao.selectSchedule(worker.getW_username(), "6");
+                if(!scheduledDates.contains(dates[i])){
+                    arrangeDao.insertCounselorArrange(dates[i], worker.getW_name(), worker.getW_username());
+                }
+            }
         }
         return Result.success();
     }
 
     @PostMapping("/insertCounselor")
-    public Result addCounselor(@RequestParam String date, @RequestBody ArrangeElement[] counselors){
-        int num = counselors.length;
-        for(int i = 0; i < num; i++){
-            arrangeDao.insertCounselorArrange(date, counselors[i].getW_name(), counselors[i].getW_username());
+    public Result addCounselor(@RequestBody ArrangeArray counselors){
+        String[] dates = counselors.getDates();
+        ArrangeElement[] workers = counselors.getWorkers();
+        for(int i = 0; i < dates.length; i++){
+            for (int j=0 ; j< workers.length; j++){
+                ArrangeElement worker = workers[j];
+                List<String> scheduledDates = arrangeDao.selectSchedule(worker.getW_username(), "6");
+                if(!scheduledDates.contains(dates[i])){
+                    arrangeDao.insertCounselorArrange(dates[i], worker.getW_name(), worker.getW_username());
+                }
+            }
         }
         return Result.success();
     }

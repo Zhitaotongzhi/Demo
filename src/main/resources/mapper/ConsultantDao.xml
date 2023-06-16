@@ -126,4 +126,5 @@
     <update id="updatetotalOrder">
         update worker set totalOrder = totalOrder + 1 where username = #{username}
     </update>
+
 </mapper>
