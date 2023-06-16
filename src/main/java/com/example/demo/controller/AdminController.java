@@ -65,8 +65,27 @@ public class AdminController {
         String username = worker.getUsername();
         String password = worker.getPassword();
         Worker new_worker = workerDao.selectWorkerByUsername(username);
-        boolean login = workerService.login(worker);
-        if(login == true) {
+        String login = workerService.login(worker);
+        System.out.println(login);
+        if(login.equals("该用户已登录")){
+            return Result.failure("3", "用户已登录");
+        }else if(login.equals("该用户不存在")){
+            return Result.failure("2", "用户不存在");
+        }else if(login.equals("登录出错")){
+            return Result.failure("2", "登录出错");
+        }else if(login.equals("登录成功")){
+            workerDao.updateIsOnline(username);
+            Map<String, Object> user = new HashMap<>();
+            String token = JwtUtil.sign(worker.getUsername(), user);
+            user.put("token", token);
+            user.put("user", new_worker);
+            return Result.success(user);
+        }else{
+            return Result.failure("2", "系统错误");
+        }
+        //String is_online = workerDao.workerIsOnline(username);
+        //System.out.println(is_online);
+        /*if(login == true) {
             workerDao.updateIsOnline(username);
             Map<String, Object> user = new HashMap<>();
             String token = JwtUtil.sign(worker.getUsername(), user);
@@ -77,7 +96,7 @@ public class AdminController {
             return Result.failure("2","账号不存在或密码错误");
         }else {
             return Result.failure("2","参数无效");
-        }
+        }*/
     }
 
     //修改密码
@@ -178,5 +197,13 @@ public class AdminController {
         }else{
             return Result.failure("0","操作失败");
         }
+    }
+
+
+    //工作人员离线
+    @PatchMapping("/user/exit/{username}")
+    public Result logout(@PathVariable String username){
+        workerDao.updateIsOffline(username);
+        return Result.success();
     }
 }

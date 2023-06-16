@@ -16,4 +16,12 @@
     <update id="updatePassword">
         update worker set password = #{password} where username = #{username}
     </update>
+    <!--工作人员离线-->
+    <update id="updateIsOffline">
+        update worker set is_online = "0" where username = #{username}
+    </update>
+    <!--检测登录状态-->
+    <select id="workerIsOnline" resultType="String">
+        select is_online from worker where username = #{loginUsername}
+    </select>
 </mapper>

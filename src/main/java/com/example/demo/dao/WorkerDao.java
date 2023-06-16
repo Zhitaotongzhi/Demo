@@ -14,5 +14,9 @@ public interface WorkerDao {
     public void updateIsOnline(String username);
 
     public void updatePassword(String password, String username);
+    //工作人员离线
+    public void updateIsOffline(String username);
+    //检测登录状态
+    public String workerIsOnline(String loginUsername);
 
 }
