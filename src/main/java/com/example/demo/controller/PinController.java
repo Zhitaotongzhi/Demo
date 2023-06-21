@@ -17,13 +17,13 @@ public class PinController {
     private String appSecret = "7bd748fb-7a89-4d80-a580-49ea0a22f24a";
 
     @GetMapping("/sendCode")
-    public String sendCode(String phonenumber){
+    public String sendCode(String pno){
         try{
             JSONObject json;
             String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000,1000000));
             ZhenziSmsClient client = new ZhenziSmsClient(apiUrl,appId,appSecret);
             Map<String, Object> params = new HashMap<>();
-            params.put("number", phonenumber);
+            params.put("number", pno);
             params.put("templateId",11675);
             String[] templateParams = new String[2];
             templateParams[0] = code;
