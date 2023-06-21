@@ -83,20 +83,6 @@ public class AdminController {
         }else{
             return Result.failure("2", "系统错误");
         }
-        //String is_online = workerDao.workerIsOnline(username);
-        //System.out.println(is_online);
-        /*if(login == true) {
-            workerDao.updateIsOnline(username);
-            Map<String, Object> user = new HashMap<>();
-            String token = JwtUtil.sign(worker.getUsername(), user);
-            user.put("token", token);
-            user.put("user", new_worker);
-            return Result.success(user);
-        }else if(login == false){
-            return Result.failure("2","账号不存在或密码错误");
-        }else {
-            return Result.failure("2","参数无效");
-        }*/
     }
 
     //修改密码
@@ -206,4 +192,16 @@ public class AdminController {
         workerDao.updateIsOffline(username);
         return Result.success();
     }
+
+    //为咨询师绑定督导
+    @PostMapping("/user/bind")
+    public Result bind(@RequestBody Bind counselor, @RequestBody Bind supervisor){
+        String counselorName = counselor.getName();
+        String counselorUsername = counselor.getUsername();
+        String supervisorName = supervisor.getName();
+        String supervisorUsername = supervisor.getUsername();
+        workerDao.insertBind(counselorName, counselorUsername, supervisorName, supervisorUsername);
+        return Result.success();
+    }
+
 }

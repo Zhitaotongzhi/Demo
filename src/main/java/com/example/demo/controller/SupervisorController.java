@@ -6,6 +6,8 @@ import com.example.demo.dao.ConsultantDao;
 import com.example.demo.dao.SupervisorDao;
 import com.example.demo.domain.Consultant;
 import com.example.demo.domain.Supervisor;
+import com.example.demo.dao.WorkerDao;
+import com.example.demo.domain.Bind;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.SupervisorService;
 import com.example.demo.utils.Result;
@@ -35,6 +37,9 @@ public class SupervisorController {
 
     @Autowired
     private ConsultantDao consultantDao;
+
+    @Autowired
+    private WorkerDao workerDao;
 
     //查看督导列表
     @GetMapping("/list")
@@ -170,6 +175,15 @@ public class SupervisorController {
         maps.put("total", total);
         maps.put("supervisors", list);
         return Result.success(maps);
+    }
+
+    //获取督导姓名和用户名
+    @GetMapping("/bindList")
+    public Result bindList(){
+        List<Bind> supervisors = workerDao.findAllSupervisor();
+        Map<String, Object> map = new HashMap<>();
+        map.put("supervisors", supervisors);
+        return Result.success(map);
     }
 
 }

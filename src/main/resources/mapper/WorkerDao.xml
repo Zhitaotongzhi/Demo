@@ -24,4 +24,15 @@
     <select id="workerIsOnline" resultType="String">
         select is_online from worker where username = #{loginUsername}
     </select>
+
+    <!--为咨询师绑定督导-->
+    <select id="findAllCounselor" resultType="com.example.demo.domain.Bind">
+        select name, username from worker where authority = "Counselor" and bind_username = null
+    </select>
+    <select id="findAllSupervisor" resultType="com.example.demo.domain.Bind">
+        select name, username from worker where authority = "Supervisor"
+    </select>
+    <insert id="insertBind" parameterType="String">
+        insert into worker(bind_name, bind_username) values (#{supervisorName}, #{supervisorUsername}) where username = #{counselorName} and name = #{counselorName}
+    </insert>
 </mapper>

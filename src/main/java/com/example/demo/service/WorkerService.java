@@ -30,11 +30,18 @@ public class WorkerService {
         String loginPassword = worker.getPassword();
         Worker loginWorker = workerDao.selectWorkerByUsername(loginUsername);
         String is_online = workerDao.workerIsOnline(loginUsername);
-        if(is_online.equals("1") && loginWorker != null){
-            return "该用户已登录";
-        }else if(loginWorker == null && is_online.equals("0")){
+//        if(is_online.equals("1") && loginWorker != null){
+//            return "该用户已登录";
+//        }else if(loginWorker == null && is_online.equals("0")){
+//            return "该用户不存在";
+//        }else if(is_online.equals("0") && loginWorker.getPassword().equals(loginPassword)){
+//            return "登录成功";
+//        }else{
+//            return "登录出错";
+//        }
+       if(loginWorker == null ){
             return "该用户不存在";
-        }else if(is_online.equals("0") && loginWorker.getPassword().equals(loginPassword)){
+        }else if(loginWorker.getPassword().equals(loginPassword)){
             return "登录成功";
         }else{
             return "登录出错";
