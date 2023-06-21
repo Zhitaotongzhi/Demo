@@ -4,8 +4,6 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import com.example.demo.dao.AdminDao;
 import com.example.demo.dao.RecordDao;
-import com.example.demo.dao.WorkerDao;
-import com.example.demo.domain.Bind;
 import com.example.demo.utils.JwtUtil;
 import com.example.demo.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,6 @@ import com.example.demo.domain.Consultant;
 import com.example.demo.dao.ConsultantDao;
 import com.example.demo.service.ConsultantService;
 import com.example.demo.service.AdminService;
-import com.example.demo.dao.WorkerDao;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -40,9 +37,6 @@ public class ConsultantController {
 
     @Autowired
     private RecordDao recordDao;
-
-    @Autowired
-    private WorkerDao workerDao;
 
     //查询咨询师列表
     @GetMapping("/list")
@@ -199,14 +193,5 @@ public class ConsultantController {
         Map<String, Object> maps = new HashMap<>();
         maps.put("todayTime", todayTime);
         return Result.success(maps);
-    }
-
-    //获取咨询师姓名和用户名
-    @GetMapping("/bindList")
-    public Result bindCounselor(){
-        List<Bind> counselors = workerDao.findAllCounselor();
-        Map<String, Object> map = new HashMap<>();
-        map.put("counselors", counselors);
-        return Result.success(map);
     }
 }

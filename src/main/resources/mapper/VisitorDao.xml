@@ -24,7 +24,7 @@
         update visitor <set>name = #{name}, gender = #{gender}, contact_name = #{contact_name}, contact_pno = #{contact_pno}, image = #{image}</set> where pno = #{pno}
     </update>
 
-    <select id="findName" parameterType="String">
+    <select id="findName" resultType="String" parameterType="String">
         select name from visitor where pno = #{pno}
     </select>
 

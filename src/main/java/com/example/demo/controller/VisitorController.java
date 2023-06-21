@@ -124,4 +124,15 @@ public class VisitorController {
         return Result.success();
     }
 
+    //获得访客名字
+    @PostMapping("/name")
+    public Result visitorName(@RequestParam String pno){
+        String name = visitorDao.findName(pno);
+        System.out.println(name+"============");
+//        Map<String, Object> visitorName = new HashMap<>();
+//        visitorName.put("name",name);
+        return Result.success(name);
+    }
+
+
 }

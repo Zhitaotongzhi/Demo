@@ -74,4 +74,5 @@ public interface ConsultantDao {
     //总咨询数加一
     public void updatetotalOrder(String username);
 
+
 }
