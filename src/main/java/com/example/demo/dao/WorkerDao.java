@@ -27,5 +27,7 @@ public interface WorkerDao {
     List<Bind> findAllSupervisor();
     public int insertBind(String counselorName, String counselorUsername, String supervisorName, String supervisorUsername);
 
+    //咨询师现在正在进行的求助数
+    int assistCount(String username);
 
 }

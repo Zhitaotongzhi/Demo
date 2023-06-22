@@ -52,4 +52,12 @@
     <select id="onLineCount" resultType="long">
         select count(*) from worker where is_online = "1" and authority = "Supervisor" and status = "normal"
     </select>
+
+    <!--更新正在进行的求助数量-->
+    <update id="addCurrentAssist">
+        update worker set current = current + 1 where username = #{username}
+    </update>
+    <update id="subCurrentAssist">
+        update worker set current = current - 1 where username = #{username}
+    </update>
 </mapper>

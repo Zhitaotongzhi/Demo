@@ -10,8 +10,27 @@ public class Worker {
     private String password;
     private String authority;
     private String gender;
+    private String bind_name;
+    private String bind_username;
 
     private String name;
+
+    public String getBind_name() {
+        return bind_name;
+    }
+
+    public void setBind_name(String bind_name) {
+        this.bind_name = bind_name;
+    }
+
+    public String getBind_username() {
+        return bind_username;
+    }
+
+    public void setBind_username(String bind_username) {
+        this.bind_username = bind_username;
+    }
+
     private String pno;
     private String email;
     private String title;
@@ -24,6 +43,8 @@ public class Worker {
                 ", password='" + password + '\'' +
                 ", authority='" + authority + '\'' +
                 ", gender='" + gender + '\'' +
+                ", bind_name='" + bind_name + '\'' +
+                ", bind_username='" + bind_username + '\'' +
                 ", name='" + name + '\'' +
                 ", pno='" + pno + '\'' +
                 ", email='" + email + '\'' +

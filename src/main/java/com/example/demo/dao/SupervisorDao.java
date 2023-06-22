@@ -35,4 +35,7 @@ public interface SupervisorDao {
     //在线的督导列表
     List<Supervisor> findAllSupIsonline(int pageNum, int pageSize);
     long onLineCount();
+    //更新正在进行的咨询数量
+    public void addCurrentAssist(String username);
+    public void subCurrentAssist(String username);
 }

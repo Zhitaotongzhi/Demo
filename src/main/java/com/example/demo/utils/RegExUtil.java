@@ -7,10 +7,7 @@ public class RegExUtil {
     private static String regEx_Passwprd = "^.{6,}$";
     private static String regEx_Username = "^[a-zA-Z_]+$";
     private static String regEx_Name = "^[\u4e00-\u9fa5a-zA-Z]{2,32}$";
-
-    //Pattern pattern_Password = Pattern.compile(regEx_Passwprd);
-    //Pattern pattern_Username = Pattern.compile(regEx_Username);
-    //Pattern pattern_Name = Pattern.compile(regEx_Name);
+    private static String regEx_Pno = "^1[3-9]\\d{9}$";
 
     public static String detectPassword(String password){
         Pattern pattern_Password = Pattern.compile(regEx_Passwprd);
@@ -39,6 +36,16 @@ public class RegExUtil {
             return "姓名格式错误";
         }else{
             return "姓名格式正确";
+        }
+    }
+
+    public static String detectPno(String pno){
+        Pattern pattern_Pno = Pattern.compile(regEx_Pno);
+        Matcher matcher = pattern_Pno.matcher(pno);
+        if(!matcher.matches()){
+            return "电话号码格式错误";
+        }else{
+            return "电话号码格式正确";
         }
     }
 }

@@ -35,4 +35,8 @@
     <insert id="insertBind" parameterType="String">
         insert into worker(bind_name, bind_username) values (#{supervisorName}, #{supervisorUsername}) where username = #{counselorName} and name = #{counselorName}
     </insert>
+
+    <select id="assistCount" resultType="int">
+        select current from worker where username = #{username}
+    </select>
 </mapper>

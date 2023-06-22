@@ -186,4 +186,26 @@ public class SupervisorController {
         return Result.success(map);
     }
 
+    //获取正在进行的求助数
+    @GetMapping("/currentAssist/{username}")
+    public Result currentAssist(@PathVariable String username){
+        int current = workerDao.assistCount(username);
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("current", current);
+        return Result.success(maps);
+    }
+
+    //更新正在进行求助的数量
+    @PatchMapping("/addCurrent/{username}")
+    public Result addCurrent(@PathVariable String username){
+        supervisorDao.addCurrentAssist(username);
+        return Result.success();
+    }
+
+    @PatchMapping("/subCurrent/{username}")
+    public Result subCurrent(@PathVariable String username){
+        supervisorDao.subCurrentAssist(username);
+        return Result.success();
+    }
+
 }
