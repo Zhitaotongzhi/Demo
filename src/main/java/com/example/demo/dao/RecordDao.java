@@ -59,15 +59,17 @@ public interface RecordDao {
     public int insertRecord(Record record);
     //统计今天一共的咨询总数
     public int totalCount(String currentDate);
-    public int counselorRecordCount(String counselorName, String currentDate);
+    public int counselorRecordCount(String counselorUsername, String currentDate);
     //统计今天总咨询时长
     public Date totalTimeCount(String currentDate);
-    public Date counselotTotalTime(String counselorName, String currentDate);
+    public Date counselotTotalTime(String counselorUsername, String currentDate);
     //显示最近的咨询记录
     List<Record> currentRecord(int limit);
     //正在进行的总咨询数量
     long currentCount();
     //统计某一位访客和某一位咨询师咨询记录的数量
     //int v2cCount(String visitorName, String counselorName);
+    //一位咨询师查看自己最近的咨询记录
+    List<Record> findAllNewRecord(String counselorUsername, int limit);
 
 }

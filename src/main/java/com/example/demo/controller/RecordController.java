@@ -264,6 +264,15 @@ public class RecordController {
         return Result.success(count);
     }
 
+    //一位咨询师最近的咨询记录
+    @GetMapping("/latestRecord/{counselorUsername}")
+    public Result latestRecord(@PathVariable String counselorUsername){
+        List<Record> records = recordDao.findAllNewRecord(counselorUsername, 5);
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("records", records);
+        return Result.success(maps);
+    }
+
     //统计某一位咨询师和某一位访客的咨询记录数量
     /*@GetMapping("/ownCount")
     public Result ownCount(@RequestParam String visitorName, @RequestParam String counselorName){

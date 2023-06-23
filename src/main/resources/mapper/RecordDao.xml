@@ -131,14 +131,14 @@
     </select>
     <!--统计咨询师当天咨询的总数-->
     <select id="counselorRecordCount" parameterType="String" resultType="int">
-        select count(*) from record where c_name = #{counselorName} and starttime > #{currentDate}
+        select count(*) from record where c_username = #{counselorUsername} and starttime > #{currentDate}
     </select>
     <!--统计今天的咨询总时长-->
     <select id="totalTimeCount" parameterType="String" resultType="java.sql.Time">
         select SEC_TO_TIME(sum(TIME_TO_SEC(duration))) from record where starttime > #{currentDate}
     </select>
     <select id="counselotTotalTime" resultType="java.sql.Time">
-        select SEC_TO_TIME(sum(TIME_TO_SEC(duration))) from record where  c_name = #{counselorName} and starttime> #{currentDate}
+        select SEC_TO_TIME(sum(TIME_TO_SEC(duration))) from record where  c_username = #{counselorUsername} and starttime> #{currentDate}
     </select>
     <!--最近的咨询记录-->
     <select id="currentRecord" resultType="com.example.demo.domain.Record">
@@ -147,6 +147,10 @@
     <!--正在进行的咨询数量-->
     <select id="currentCount" resultType="long">
         select sum(current) from worker where authority = "Counselor"
+    </select>
+    <!--一位咨询师最近的咨询记录-->
+    <select id="findAllNewRecord" resultType="com.example.demo.domain.Record">
+        select * from record where c_username = #{counselorUsername} ORDER BY startttime DESC limit #{limit}
     </select>
     <!--统计某一位咨询师和某一位访客咨询记录的数量-->
     <!--<select id="v2cCount" resultType="int" parameterType="String">

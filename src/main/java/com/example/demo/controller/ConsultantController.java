@@ -157,8 +157,10 @@ public class ConsultantController {
     //一个咨询师正在进行的咨询总数
     @GetMapping("/currentCount/{username}")
     public Result currentCount(@PathVariable String username){
-        consultantDao.currentCon(username);
-        return Result.success();
+       int current = consultantDao.currentCon(username);
+       Map<String, Object> maps = new HashMap<>();
+       maps.put("current", current);
+        return Result.success(maps);
     }
 
 
@@ -182,10 +184,11 @@ public class ConsultantController {
     }
 
     //今日的咨询数
-    @GetMapping("/todayCount/{username}")
-    public Result todayCount(@PathVariable String username){
+    @GetMapping("/todayCount/{counselorUsername}")
+    public Result todayCount(@PathVariable String counselorUsername){
         LocalDate date = LocalDate.now();
-        int todayCount = recordDao.counselorRecordCount(username, date.toString());
+        System.out.println(date);
+        int todayCount = recordDao.counselorRecordCount(counselorUsername, date.toString());
         Map<String, Object> maps = new HashMap<>();
         maps.put("todayCount", todayCount);
         return Result.success(maps);
@@ -207,10 +210,10 @@ public class ConsultantController {
         Consultant consultant = consultantDao.selectCounselor(username);
         Map<String, Object> boundSupervisorDetails = new HashMap<>();
         List<Supervisor> supervisors = new ArrayList<>();
-        System.out.println(consultant.getBind_username()+"   222");
+        //System.out.println(consultant.getBind_username()+"   222");
         Supervisor supervisor = supervisorDao.selectSupervisorByUsername(consultant.getBind_username());
-       System.out.println(supervisor+"====");
-       System.out.println(supervisor.getIs_online()+"111111");
+       //System.out.println(supervisor+"====");
+       //System.out.println(supervisor.getIs_online()+"111111");
         if(supervisor.getIs_online().equals("1")){
             supervisors.add(supervisor);
             boundSupervisorDetails.put("total",supervisors.size());
@@ -219,8 +222,6 @@ public class ConsultantController {
             boundSupervisorDetails.put("total",0);
             boundSupervisorDetails.put("supervisors",supervisors);
         }
-//        boundSupervisorDetails.put("boundSupervisorUsername", consultant.getBind_username());
-//        boundSupervisorDetails.put("boundSupervisorName", consultant.getBind_name());
         return Result.success(boundSupervisorDetails);
     }
 }
