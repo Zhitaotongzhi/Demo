@@ -206,16 +206,18 @@ public class ConsultantController {
     public Result bound(@RequestParam String username){
         Consultant consultant = consultantDao.selectCounselor(username);
         Map<String, Object> boundSupervisorDetails = new HashMap<>();
-        List<Consultant> consultants = new ArrayList<>();
-//        System.out.println(consultant.getBind_username());
+        List<Supervisor> supervisors = new ArrayList<>();
+        System.out.println(consultant.getBind_username()+"   222");
         Supervisor supervisor = supervisorDao.selectSupervisorByUsername(consultant.getBind_username());
+       System.out.println(supervisor+"====");
+       System.out.println(supervisor.getIs_online()+"111111");
         if(supervisor.getIs_online().equals("1")){
-            consultants.add(consultant);
-            boundSupervisorDetails.put("total",consultants.size());
-            boundSupervisorDetails.put("consultants",consultants);
+            supervisors.add(supervisor);
+            boundSupervisorDetails.put("total",supervisors.size());
+            boundSupervisorDetails.put("supervisors",supervisors);
         }else {
             boundSupervisorDetails.put("total",0);
-            boundSupervisorDetails.put("consultants",consultants);
+            boundSupervisorDetails.put("supervisors",supervisors);
         }
 //        boundSupervisorDetails.put("boundSupervisorUsername", consultant.getBind_username());
 //        boundSupervisorDetails.put("boundSupervisorName", consultant.getBind_name());
