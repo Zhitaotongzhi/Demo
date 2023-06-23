@@ -263,4 +263,13 @@ public class RecordController {
         count.put("total", total);
         return Result.success(count);
     }
+
+    //统计某一位咨询师和某一位访客的咨询记录数量
+    /*@GetMapping("/ownCount")
+    public Result ownCount(@RequestParam String visitorName, @RequestParam String counselorName){
+        int ownCount = recordDao.v2cCount(visitorName, counselorName);
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("ownCount", ownCount);
+        return Result.success(maps);
+    }*/
 }

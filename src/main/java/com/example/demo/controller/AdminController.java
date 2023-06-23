@@ -63,6 +63,7 @@ public class AdminController {
     @PostMapping("/user/login")
     public Result adminLogin(@RequestBody Worker worker){
         String username = worker.getUsername();
+        System.out.println(username);
         String password = worker.getPassword();
         Worker new_worker = workerDao.selectWorkerByUsername(username);
         String login = workerService.login(worker);

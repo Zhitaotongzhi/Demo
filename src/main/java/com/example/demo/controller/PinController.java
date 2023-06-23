@@ -3,12 +3,11 @@ package com.example.demo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.zhenzi.sms.ZhenziSmsClient;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class PinController {
@@ -16,8 +15,8 @@ public class PinController {
     private String appId = "113156";
     private String appSecret = "7bd748fb-7a89-4d80-a580-49ea0a22f24a";
 
-    @GetMapping("/sendCode")
-    public String sendCode(String pno){
+    @GetMapping("/sendCode/{pno}")
+    public String sendCode(@PathVariable String pno){
         try{
             JSONObject json;
             String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000,1000000));

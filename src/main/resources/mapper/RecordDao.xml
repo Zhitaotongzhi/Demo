@@ -148,4 +148,8 @@
     <select id="currentCount" resultType="long">
         select sum(current) from worker where authority = "Counselor"
     </select>
+    <!--统计某一位咨询师和某一位访客咨询记录的数量-->
+    <!--<select id="v2cCount" resultType="int" parameterType="String">
+        select count(1) from record where v_name = #{visitorName} and c_name = #{counselorName}
+    </select>-->
 </mapper>

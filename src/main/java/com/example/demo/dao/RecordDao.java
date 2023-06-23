@@ -67,5 +67,7 @@ public interface RecordDao {
     List<Record> currentRecord(int limit);
     //正在进行的总咨询数量
     long currentCount();
+    //统计某一位访客和某一位咨询师咨询记录的数量
+    //int v2cCount(String visitorName, String counselorName);
 
 }

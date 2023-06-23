@@ -15,7 +15,7 @@ public class Supervisor {
     private String email;
     private String status;
     private String authority;
-    private int is_online;
+    private String is_online;
     private String title;
     private String workunit;
 
@@ -111,11 +111,11 @@ public class Supervisor {
         this.authority = authority;
     }
 
-    public int getIs_online() {
+    public String getIs_online() {
         return is_online;
     }
 
-    public void setIs_online(int is_online) {
+    public void setIs_online(String is_online) {
         this.is_online = is_online;
     }
 

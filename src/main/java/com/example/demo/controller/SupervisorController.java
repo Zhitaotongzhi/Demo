@@ -41,6 +41,7 @@ public class SupervisorController {
     @Autowired
     private WorkerDao workerDao;
 
+
     //查看督导列表
     @GetMapping("/list")
     public Result supervisorList(@RequestParam String pageNum,@RequestParam String pageSize,@RequestParam String search){
@@ -139,11 +140,13 @@ public class SupervisorController {
     }
 
     //督导查看在线咨询师列表
-    @GetMapping("/onlineList/{username}")
-    public Result onlineList(@PathVariable String username, @RequestParam String pageNum, @RequestParam String pageSize){
+    @GetMapping("/counselorList/{supervisorUsername}")
+    public Result onlineList(@PathVariable String supervisorUsername, @RequestParam String pageNum, @RequestParam String pageSize){
         int i = Integer.parseInt(pageNum);
         int j = Integer.parseInt(pageSize);
-        List<Consultant> counselors = consultantDao.findAllBindIsOnline((i - 1) * j, j, username);
+        System.out.println(supervisorUsername);
+        List<Consultant> counselors = consultantDao.findAllBindIsOnline((i - 1) * j, j, supervisorUsername);
+        System.out.println(counselors);
         long total = counselors.size();
         Map<String, Object> counselor = new HashMap<>();
         counselor.put("total", total);
@@ -207,5 +210,24 @@ public class SupervisorController {
         supervisorDao.subCurrentAssist(username);
         return Result.success();
     }
+
+    //总的求助数
+    @GetMapping("/totalAssist/{username}")
+    public Result totalAssist(@PathVariable String username){
+        int totalAssist = supervisorDao.totalCount(username);
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("totalAssist", totalAssist);
+        return Result.success(maps);
+    }
+
+    //咨询师求助时看到的督导列表
+    /*@GetMapping("/assistList/{username}")
+    public Result assistList(@PathVariable String username){
+        String supUsername = supervisorDao.bindUsername2Username(username);
+        Supervisor supervisor = supervisorDao.findBindSupIsonline(supUsername);
+        Map<String, Object> map = new HashMap<>();
+        map.put("supervisor", supervisor);
+        return Result.success(map);
+    }*/
 
 }

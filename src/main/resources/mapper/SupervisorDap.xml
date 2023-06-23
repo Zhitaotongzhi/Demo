@@ -60,4 +60,21 @@
     <update id="subCurrentAssist">
         update worker set current = current - 1 where username = #{username}
     </update>
+    <!--督导总求助数-->
+    <select id="totalCount" resultType="int">
+        select totalOrder from worker where username = #{username}
+    </select>
+
+    <!--咨询师求助督导时看到的督导列表-->
+    <!--<select id="BindSupIsonline" resultType="com.example.demo.domain.Supervisor">
+        select * from worker where username = #{username} and is_online = "1"
+    </select>
+    <select id="bindUsername2Username" resultType="String ">
+        select bind_username from worker where username = #{username}
+    </select>-->
+
+    <!--与某督导绑定的在线的咨询师-->
+    <select id="findBindCounselorIsonline" resultType="com.example.demo.domain.Consultant">
+        select * from worker where bind_username = #{username} and is_online = "1" limit #{pageNum}, #{pageSize}
+    </select>
 </mapper>

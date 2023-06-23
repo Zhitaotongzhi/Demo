@@ -21,7 +21,7 @@ public class Consultant {
     private String workunit;
     private String status;
     private String authority;
-    private int is_online;
+    private String is_online;
     private int limit;
     private int orderNumber;
     private int current;
@@ -142,11 +142,11 @@ public class Consultant {
         this.authority = authority;
     }
 
-    public int getIs_online() {
+    public String getIs_online() {
         return is_online;
     }
 
-    public void setIs_online(int is_online) {
+    public void setIs_online(String is_online) {
         this.is_online = is_online;
     }
 

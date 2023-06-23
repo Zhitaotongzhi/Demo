@@ -209,7 +209,7 @@ public class ConsultantController {
         List<Consultant> consultants = new ArrayList<>();
 //        System.out.println(consultant.getBind_username());
         Supervisor supervisor = supervisorDao.selectSupervisorByUsername(consultant.getBind_username());
-        if(supervisor.getIs_online()==1){
+        if(supervisor.getIs_online().equals("1")){
             consultants.add(consultant);
             boundSupervisorDetails.put("total",consultants.size());
             boundSupervisorDetails.put("consultants",consultants);

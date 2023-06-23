@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.domain.Consultant;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 import com.example.demo.domain.Supervisor;
@@ -35,7 +36,16 @@ public interface SupervisorDao {
     //在线的督导列表
     List<Supervisor> findAllSupIsonline(int pageNum, int pageSize);
     long onLineCount();
-    //更新正在进行的咨询数量
+    //更新正在进行的求助数量
     public void addCurrentAssist(String username);
     public void subCurrentAssist(String username);
+    //一个督导总求助数量
+    int totalCount(String username);
+
+    //咨询师求助督导时看到的督导列表
+    Supervisor BindSupIsonline(String username);
+    public String bindUsername2Username(String username);
+
+    //与某督导绑定的在线的咨询师
+    List<Consultant> findBindCounselorIsonline(int pageNum, int pageSize, String username);
 }
