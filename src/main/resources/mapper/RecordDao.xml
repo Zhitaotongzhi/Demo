@@ -150,7 +150,7 @@
     </select>
     <!--一位咨询师最近的咨询记录-->
     <select id="findAllNewRecord" resultType="com.example.demo.domain.Record">
-        select * from record where c_username = #{counselorUsername} ORDER BY startttime DESC limit #{limit}
+        select * from record where c_username = #{counselorUsername} ORDER BY rid DESC limit #{limit}
     </select>
     <!--统计某一位咨询师和某一位访客咨询记录的数量-->
     <!--<select id="v2cCount" resultType="int" parameterType="String">
