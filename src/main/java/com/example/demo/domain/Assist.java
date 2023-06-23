@@ -3,6 +3,8 @@ package com.example.demo.domain;
 public class Assist {
     private String c_username;
     private String s_username;
+    private String c_name;
+    private String s_name;
     private String duration;
     private String date;
     public String getC_username() {
@@ -37,4 +39,31 @@ public class Assist {
         this.date = date;
     }
 
+    public String getC_name() {
+        return c_name;
+    }
+
+    public void setC_name(String c_name) {
+        this.c_name = c_name;
+    }
+
+    public String getS_name() {
+        return s_name;
+    }
+
+    public void setS_name(String s_name) {
+        this.s_name = s_name;
+    }
+
+    @Override
+    public String toString() {
+        return "Assist{" +
+                "c_username='" + c_username + '\'' +
+                ", s_username='" + s_username + '\'' +
+                ", c_name='" + c_name + '\'' +
+                ", s_name='" + s_name + '\'' +
+                ", duration='" + duration + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }

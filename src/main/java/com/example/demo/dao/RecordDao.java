@@ -1,11 +1,13 @@
 package com.example.demo.dao;
 
 import com.example.demo.domain.Record;
+import com.example.demo.domain.EveryTimeCount;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("all")
 @Mapper
@@ -71,5 +73,8 @@ public interface RecordDao {
     //int v2cCount(String visitorName, String counselorName);
     //一位咨询师查看自己最近的咨询记录
     List<Record> findAllNewRecord(String counselorUsername, int limit);
-
+    //按天返回每一天的咨询数
+    List<EveryTimeCount> findEveryDayCount();
+    //按小时返回一天各小时的咨询数
+    List<EveryTimeCount> findEveryHourCount(String currentDay);
 }

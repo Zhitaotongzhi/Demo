@@ -4,45 +4,45 @@
 <mapper namespace="com.example.demo.dao.RecordDao">
     <!--查询所有咨询记录-->
     <select id="findAllRecord" resultType="com.example.demo.domain.Record">
-        select * from record limit #{pageNum}, #{pageSize}
+        select * from record ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
     <select id="findAllRecordCount" resultType="long">
         select count(1) from record
     </select>
     <!--查找对应访客的咨询记录-->
     <select id="findAllRecordByName" resultType="com.example.demo.domain.Record">
-        select * from record where v_name like #{visitorName}"%" limit #{pageNum}, #{pageSize}
+        select * from record where v_name like #{visitorName}"%" ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
     <select id="findAllRecordByNameCount" resultType="long">
         select count(1) from record where v_name = #{visitorName}
     </select>
     <!--查找对应咨询师的咨询记录-->
     <select id="findAllRecordByConName" resultType="com.example.demo.domain.Record">
-        select * from record where c_name like #{counselorName}"%" limit #{pageNum}, #{pageSize}
+        select * from record where c_name like #{counselorName}"%" ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
     <select id="findAllRecordByConNameCount" resultType="long">
         select count(1) from record where c_name = #{counselorName}
     </select>
     <!--查找对应咨询师和访客的咨询记录-->
     <select id="findAllRecordByNameAndUserame" resultType="com.example.demo.domain.Record">
-        select * from record where v_name = #{visitorName} and c_name = #{counselorName} limit #{pageNum}, #{pageSize}
+        select * from record where v_name = #{visitorName} and c_name = #{counselorName} ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
     <!--查找对应时间的咨询记录-->
     <select id="findAllRecordByTime" resultType="com.example.demo.domain.Record">
-        select * from record where starttime between #{startDate} and #{endDate}
+        select * from record where starttime between #{startDate} and #{endDate} ORDER BY rid DESC
     </select>
     <!--访客一段时间内的咨询记录-->
     <select id="findAllRecordByNameAndTime" resultType="com.example.demo.domain.Record">
-        select * from record where v_name = #{visitorName} and starttime between #{startDate} and #{endDate}
+        select * from record where v_name = #{visitorName} and starttime between #{startDate} and #{endDate} ORDER BY rid DESC
     </select>
 
     <!--咨询师一段时间内的咨询记录-->
     <select id="findAllRecordByUsernameAndTime" resultType="com.example.demo.domain.Record">
-        select * from record where c_name = #{counselorName} and starttime between #{startDate} and #{endDate}
+        select * from record where c_name = #{counselorName} and starttime between #{startDate} and #{endDate} ORDER BY rid DESC
     </select>
     <!--查找满足所有条件的咨询记录-->
     <select id="findAllRecordByAll" resultType="com.example.demo.domain.Record">
-        select * from record where v_name = #{visitorName} and c_name = #{counselorName} and starttime between #{startDate} and #{endDate}
+        select * from record where v_name = #{visitorName} and c_name = #{counselorName} and starttime between #{startDate} and #{endDate} ORDER BY rid DESC
     </select>
     <!--找到所有与该督导绑定的咨询师的name-->
     <select id="findAllBindByUsername" parameterType="String" resultType="String">
@@ -57,7 +57,7 @@
                             #{counselorName}
                         </foreach>
         </if>
-    </where> limit #{pageNum}, #{pageSize}
+    </where>  ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
 
     <select id="findAllBindRecordCount" resultType="long">
@@ -77,7 +77,7 @@
         #{counselorName}
     </foreach>
     </if> and v_name = #{name}
-    </where>
+    </where> ORDER BY rid DESC
     </select>
     <!--通过时间查询与自己绑定的咨询师的咨询记录-->
     <select id="findAllBindRecordByTime" resultType="com.example.demo.domain.Record">
@@ -87,7 +87,7 @@
             #{counselorName}
         </foreach>
         </if> and starttime between #{startTime} and #{endTime}
-    </where>
+    </where> ORDER BY rid DESC
     </select>
     <!--返回访客最后一次咨询的时间-->
     <select id="findLatestTime" parameterType="String">
@@ -100,24 +100,24 @@
     <!--咨询师查看的咨询记录-->
     <!--查看所有的咨询记录-->
     <select id="findAllSelfRecord" resultType="com.example.demo.domain.Record">
-        select * from record where c_name = #{counselorName} limit #{pageNum}, #{pageSize}
+        select * from record where c_name = #{counselorName} ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
     <!--访客姓名查询-->
     <select id="findAllSelfRecordByName" resultType="com.example.demo.domain.Record">
-        select * from record where c_name = #{counselorName} and v_name = #{visitorName} limit #{pageNum}, #{pageSize}
+        select * from record where c_name = #{counselorName} and v_name = #{visitorName} ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
     <!--时间查询-->
     <select id="findAllSelfRecordByTime" resultType="com.example.demo.domain.Record">
-        select * from record where c_name = #{counselorName} and starttime between #{startDate} and #{endDate} limit #{pageNum}, #{pageSize}
+        select * from record where c_name = #{counselorName} and starttime between #{startDate} and #{endDate} ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
     <!--所有条件查询-->
     <select id="findAllSelfRecordByAll" resultType="com.example.demo.domain.Record">
-        select * from record where c_name = #{counselorName} and v_name = {visitorName} and starttime between #{startDate} and #{endDate} limit #{pageNum}, #{pageSize}
+        select * from record where c_name = #{counselorName} and v_name = {visitorName} and starttime between #{startDate} and #{endDate} ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
 
     <!--访客查看自己的咨询记录-->
     <select id="findAllVisitorRecordByPno" resultType="com.example.demo.domain.Record">
-        select * from record where pno = #{pno}
+        select * from record where pno = #{pno} ORDER BY rid DESC
     </select>
 
     <!--插入咨询记录-->
@@ -138,7 +138,7 @@
         select SEC_TO_TIME(sum(TIME_TO_SEC(duration))) from record where starttime > #{currentDate}
     </select>
     <select id="counselotTotalTime" resultType="java.sql.Time">
-        select SEC_TO_TIME(sum(TIME_TO_SEC(duration))) from record where  c_username = #{counselorUsername} and starttime> #{currentDate}
+        select SEC_TO_TIME(sum(TIME_TO_SEC(duration))) from record where  c_username = #{counselorUsername} and starttime > #{currentDate}
     </select>
     <!--最近的咨询记录-->
     <select id="currentRecord" resultType="com.example.demo.domain.Record">
@@ -156,4 +156,13 @@
     <!--<select id="v2cCount" resultType="int" parameterType="String">
         select count(1) from record where v_name = #{visitorName} and c_name = #{counselorName}
     </select>-->
+
+    <!--每一天的咨询数量-->
+    <select id="findEveryDayCount" resultType="com.example.demo.domain.EveryTimeCount">
+        select DATE_FORMAT(starttime,'%d') as everyTime ,count(*) as everyCount from record where DATE_FORMAT(starttime,'%Y-%m-%d') >= DATE_FORMAT('2023-06-19','%Y-%m-%d') GROUP BY DATE_FORMAT(starttime,'%d')
+    </select>
+    <!--每一小时的咨询量-->
+    <select id="findEveryHourCount" resultType="com.example.demo.domain.EveryTimeCount">
+        select DATE_FORMAT(starttime, '%h') as everyTime, count(*) as everyCount from record where starttime > #{currentDay} GROUP BY DATE_FORMAT(starttime, '%h')
+    </select>
 </mapper>

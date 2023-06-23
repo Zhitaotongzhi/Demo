@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.ConsultantDao;
+import com.example.demo.domain.EveryTimeCount;
 import com.example.demo.domain.Record;
 import com.example.demo.dao.RecordDao;
 import com.example.demo.utils.Result;
@@ -219,11 +220,12 @@ public class RecordController {
         return Result.success(total);
     }
     //咨询师今日咨询总时长
-    @GetMapping("/counselorTotalTime/{username}")
-    public Result conTotalTime(@PathVariable String username){
+    @GetMapping("/counselorTotalTime/{counselorUsername}")
+    public Result conTotalTime(@PathVariable String counselorUsername){
         LocalDate date = LocalDate.now();
-        String name = consultantDao.findByUsername(username);
-        Date totalTime = recordDao.counselotTotalTime(name, date.toString());
+        System.out.println(date);
+        String name = consultantDao.findByUsername(counselorUsername);
+        Date totalTime = recordDao.counselotTotalTime(counselorUsername, date.toString());
         Map<String, Object> total = new HashMap<>();
         total.put("totalTime", totalTime);
         return Result.success(total);
@@ -281,4 +283,22 @@ public class RecordController {
         maps.put("ownCount", ownCount);
         return Result.success(maps);
     }*/
+    //按天统计的咨询记录数量
+    @GetMapping("/everyDayCount")
+    public Result everyDayCount(){
+        List<EveryTimeCount> lists = recordDao.findEveryDayCount();
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("everyDayCount", lists);
+        return Result.success(maps);
+    }
+
+    //按小时统计咨询记录数量
+    @GetMapping("/everyHourCount")
+    public Result everyHourCount(){
+        LocalDate date = LocalDate.now();
+        List<EveryTimeCount> lists = recordDao.findEveryHourCount(date.toString());
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("everyHourCount", lists);
+        return Result.success(maps);
+    }
 }

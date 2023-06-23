@@ -5,7 +5,7 @@
 
     <!--插入咨询记录-->
     <insert id="insertAssist" parameterType="com.example.demo.domain.Assist">
-        insert into assist(c_username, s_username, duration, date) values (#{c_username}, #{s_username}, #{duration}, #{date})
+        insert into assist(c_username, s_username, c_name, s_name, duration, date) values (#{c_username}, #{s_username}, #{c_name}, #{s_name}, #{duration}, #{date})
     </insert>
 
 

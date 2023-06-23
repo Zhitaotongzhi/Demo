@@ -34,7 +34,7 @@
     </update>
 
     <select id="findAllConIsOnline" resultType="com.example.demo.domain.Consultant">
-        select * from worker  where authority = "Counselor" and is_online = "1" and orderNumber &lt; 15
+        select * from worker  where authority = "Counselor" and is_online = "1" and current &lt; 15
     </select>
 
     <select id="findAllConIsOnlineCount" resultType="long">
