@@ -120,7 +120,7 @@ public class AssistController {
 
     //咨询师查看自己的求助记录
     @GetMapping("/counselorSeeList/{counselorUsername}")
-    public Result bindAssistList(@RequestParam String pageNum, @RequestParam String pageSize, @PathVariable String counselorUsername, @RequestParam String startDate, @RequestParam String endDate){
+    public Result counselorSeeList(@RequestParam String pageNum, @RequestParam String pageSize, @PathVariable String counselorUsername, @RequestParam String startDate, @RequestParam String endDate){
         int i = Integer.parseInt(pageNum);
         int j = Integer.parseInt(pageSize);
         if(startDate.isEmpty()){
@@ -185,8 +185,8 @@ public class AssistController {
     }
 
     //显示最近的求助记录
-    @GetMapping("/currentRecords")
-    public Result currentRecord(@RequestParam String username){
+    @GetMapping("/currentAssists")
+    public Result currentAssist(@RequestParam String username){
         List<Assist> assists = assistDao.currentAssist(5, username);
         Map<String, Object> assist = new HashMap<>();
         assist.put("assists", assists);

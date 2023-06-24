@@ -100,7 +100,7 @@ public class Visitor {
                 ", password='" + password + '\'' +
                 ", contact_name='" + contact_name + '\'' +
                 ", contact_pno='" + contact_pno + '\'' +
-                ", image='" + image + '\'' +
+                //", image='" + image + '\'' +
                 ", gender='" + gender + '\'' +
                 ", vid='" + vid + '\'' +
                 ", status='" + status + '\'' +

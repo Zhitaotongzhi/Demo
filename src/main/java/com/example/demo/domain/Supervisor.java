@@ -15,9 +15,60 @@ public class Supervisor {
     private String email;
     private String status;
     private String authority;
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Supervisor{" +
+                "username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
+                ", pno='" + pno + '\'' +
+                ", email='" + email + '\'' +
+                ", status='" + status + '\'' +
+                ", authority='" + authority + '\'' +
+                ", is_online='" + is_online + '\'' +
+                ", title='" + title + '\'' +
+                ", workunit='" + workunit + '\'' +
+                ", image='" + image + '\'' +
+                ", orderNumber='" + orderNumber + '\'' +
+                ", totalOrder='" + totalOrder + '\'' +
+                ", current=" + current +
+                '}';
+    }
+
+    public String getTotalOrder() {
+        return totalOrder;
+    }
+
+    public void setTotalOrder(String totalOrder) {
+        this.totalOrder = totalOrder;
+    }
+
     private String is_online;
     private String title;
     private String workunit;
+
+    private String image;
+    private String orderNumber;
+    private String totalOrder;
+
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public int getCurrent() {
         return current;
@@ -35,24 +86,6 @@ public class Supervisor {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    @Override
-    public String toString() {
-        return "Supervisor{" +
-                "username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", gender='" + gender + '\'' +
-                ", pno='" + pno + '\'' +
-                ", email='" + email + '\'' +
-                ", status='" + status + '\'' +
-                ", authority='" + authority + '\'' +
-                ", is_online=" + is_online +
-                ", title='" + title + '\'' +
-                ", workunit='" + workunit + '\'' +
-                ", current=" + current +
-                '}';
     }
 
     public String getName() {

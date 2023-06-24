@@ -51,6 +51,15 @@ public class Worker {
 
     private String is_Busy;
     private int current;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getUsername() {
         return username;
@@ -175,6 +184,7 @@ public class Worker {
                 ", is_online='" + is_online + '\'' +
                 ", is_Busy='" + is_Busy + '\'' +
                 ", current=" + current +
+                //", image='" + image + '\'' +
                 '}';
     }
 }

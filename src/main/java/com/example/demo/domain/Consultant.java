@@ -28,6 +28,8 @@ public class Consultant {
 
     private int totalOrder;
 
+    private String image;
+
     public int getTotalOrder() {
         return totalOrder;
     }
@@ -54,6 +56,14 @@ public class Consultant {
 
     private String is_Busy;
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Consultant{" +
@@ -69,11 +79,12 @@ public class Consultant {
                 ", workunit='" + workunit + '\'' +
                 ", status='" + status + '\'' +
                 ", authority='" + authority + '\'' +
-                ", is_online=" + is_online +
+                ", is_online='" + is_online + '\'' +
                 ", limit=" + limit +
                 ", orderNumber=" + orderNumber +
                 ", current=" + current +
                 ", totalOrder=" + totalOrder +
+                ", image='" + image + '\'' +
                 ", is_Busy='" + is_Busy + '\'' +
                 '}';
     }

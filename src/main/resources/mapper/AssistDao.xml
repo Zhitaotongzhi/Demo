@@ -59,7 +59,7 @@
         AND c_username in <foreach collection="list" item="counselorUsername" open="(" separator="," close=")">
                             #{counselorUsername}</foreach>
          </if> and c_name = #{counselorName}
-        </where> ORDER BY startDate DESC
+        </where> ORDER BY startDate DESC limit #{pageNum}, #{pageSize}
     </select>
 
     <!--通过时间查询绑定的咨询师的求助记录-->
@@ -71,7 +71,7 @@
                 #{counselorUsername}
             </foreach>
             </if> and startDate between #{startDate} and #{endDate}
-        </where> ORDER BY startDate DESC
+        </where> ORDER BY startDate DESC limit #{pageNum}, #{pageSize}
     </select>
 
     <!--通过所有条件查询绑定咨询师的求助记录-->
@@ -83,7 +83,7 @@
                 #{counselorUsername}
             </foreach>
             </if> and c_name = #{counselorName} and startDate between #{startDate} and #{endDate}
-        </where> ORDER BY startDate DESC
+        </where> ORDER BY startDate DESC limit #{pageNum}, #{pageSize}
     </select>
 
     <!--统计某督导一天响应求助的总时长-->
@@ -103,11 +103,11 @@
 
     <!--咨询师自己的求助记录-->
     <select id="findAllOwnAssist" resultType="com.example.demo.domain.Assist">
-        select * from assist where c_username = #{username} ORDER BY startDate DESC limit #{limit}
+        select * from assist where c_username = #{username} ORDER BY startDate DESC limit #{pageNum}, #{pageSize}
     </select>
 
     <!--咨询师通过时间查询自己的求助记录-->
-    <select id="findAllOwnAssist" resultType="com.example.demo.domain.Assist">
-        select * from assist where c_username = #{username} and startDate between #{startDate} and #{endDate} ORDER BY startDate DESC limit #{limit}
+    <select id="findAllOwnAssistByTime" resultType="com.example.demo.domain.Assist">
+        select * from assist where c_username = #{username} and startDate between #{startDate} and #{endDate} ORDER BY startDate DESC limit #{pageNum}, #{pageSize}
     </select>
 </mapper>

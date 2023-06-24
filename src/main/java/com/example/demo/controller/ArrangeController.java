@@ -61,7 +61,7 @@ public class ArrangeController {
                 ArrangeElement worker = workers[j];
                 List<String> scheduledDates = arrangeDao.selectSchedule(worker.getW_username(), "6");
                 if(!scheduledDates.contains(dates[i])){
-                    arrangeDao.insertCounselorArrange(dates[i], worker.getW_name(), worker.getW_username());
+                    arrangeDao.insertSupervisorArrange(dates[i], worker.getW_name(), worker.getW_username());
                 }
             }
         }
