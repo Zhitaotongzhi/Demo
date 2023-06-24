@@ -5,8 +5,41 @@
 
     <!--插入咨询记录-->
     <insert id="insertAssist" parameterType="com.example.demo.domain.Assist">
-        insert into assist(c_username, s_username, c_name, s_name, duration, date) values (#{c_username}, #{s_username}, #{c_name}, #{s_name}, #{duration}, #{date})
+        insert into assist(c_username, s_username, c_name, s_name, duration, startDate) values (#{c_username}, #{s_username}, #{c_name}, #{s_name}, #{duration}, #{startDate})
     </insert>
+
+    <!--返回所有求助记录-->
+    <select id="findAllAssist" resultType="com.example.demo.domain.Assist">
+        select * from assist limit #{pageNum}, #{pageSize}
+    </select>
+    <select id="totalAll" resultType="long">
+        select count(*) from assist
+    </select>
+    <!--通过咨询师姓名查找求助记录-->
+    <select id="findAllAssistByConName" resultType="com.example.demo.domain.Assist">
+        select * from assist where c_name = #{counselorName} limit #{pageNum}, #{pageSize}
+    </select>
+    <select id="totalByConName" resultType="long">
+        select count(*) from assist where c_name = #{counselorName}
+    </select>
+    <!--通过督导姓名查询求助记录-->
+    <select id="通过督导姓名查询求助记录" resultType="com.example.demo.domain.Assist">
+        select * from assist where s_name = #{supervisorName} limit #{pageNum}, #{pageSize}
+    </select>
+    <!--通过时间查询求助记录-->
+    <select id="findAllAssistByTime" resultType="com.example.demo.domain.Assist">
+        select * from assist where startDate between #{startDate} and #{endDate} limit #{pageNum}, #{pageSize}
+    </select>
+    <select id="totalByTime" resultType="long">
+        select count(*) from assist where startDate between #{startDate} and #{endDate}
+    </select>
+    <!--通过所有条件查询求助记录-->
+    <select id="findAllAssistByAll" resultType="com.example.demo.domain.Assist">
+        select * from assist where c_name = #{counselorName} and startDate between #{startDate} and #{endDate}
+    </select>
+    <select id="totalByAll" resultType="long">
+        select count(*) from assist where c_name = #{counselorName} and startDate between #{startDate} and #{endDate}
+    </select>
 
 
 </mapper>
