@@ -15,6 +15,9 @@ public class Worker {
 
     private String name;
 
+    private int orderNumber;
+    private int totalOrder;
+
     public String getBind_name() {
         return bind_name;
     }
@@ -35,26 +38,6 @@ public class Worker {
     private String email;
     private String title;
     private String workunit;
-
-    @Override
-    public String toString() {
-        return "Worker{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", authority='" + authority + '\'' +
-                ", gender='" + gender + '\'' +
-                ", bind_name='" + bind_name + '\'' +
-                ", bind_username='" + bind_username + '\'' +
-                ", name='" + name + '\'' +
-                ", pno='" + pno + '\'' +
-                ", email='" + email + '\'' +
-                ", title='" + title + '\'' +
-                ", workunit='" + workunit + '\'' +
-                ", is_online='" + is_online + '\'' +
-                ", is_Busy='" + is_Busy + '\'' +
-                ", current=" + current +
-                '}';
-    }
 
     private String is_online;
 
@@ -157,4 +140,41 @@ public class Worker {
         this.is_Busy = is_Busy;
     }
 
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public int getTotalOrder() {
+        return totalOrder;
+    }
+
+    public void setTotalOrder(int totalOrder) {
+        this.totalOrder = totalOrder;
+    }
+
+    @Override
+    public String toString() {
+        return "Worker{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", authority='" + authority + '\'' +
+                ", gender='" + gender + '\'' +
+                ", bind_name='" + bind_name + '\'' +
+                ", bind_username='" + bind_username + '\'' +
+                ", name='" + name + '\'' +
+                ", orderNumber=" + orderNumber +
+                ", totalOrder=" + totalOrder +
+                ", pno='" + pno + '\'' +
+                ", email='" + email + '\'' +
+                ", title='" + title + '\'' +
+                ", workunit='" + workunit + '\'' +
+                ", is_online='" + is_online + '\'' +
+                ", is_Busy='" + is_Busy + '\'' +
+                ", current=" + current +
+                '}';
+    }
 }

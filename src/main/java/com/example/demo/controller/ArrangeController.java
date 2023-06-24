@@ -37,7 +37,7 @@ public class ArrangeController {
         cal.roll(Calendar.DATE, -1);
         int dayNum = cal.getActualMaximum(Calendar.DATE);
         List<Map> arrangeData = new ArrayList<Map>();
-        for (int i = 1; i<dayNum; i++){
+        for (int i = 1; i<=dayNum; i++){
             String date = year + '-' + month + '-' + Integer.toString(i);
             List<ArrangeElement> counselorList = arrangeDao.selectCounselorArrangeByDate(date);
             List<ArrangeElement> supervisorList = arrangeDao.selectSupervisorArrangeByDate(date);

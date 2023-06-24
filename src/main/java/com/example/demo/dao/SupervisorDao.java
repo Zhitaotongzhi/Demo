@@ -48,4 +48,6 @@ public interface SupervisorDao {
 
     //与某督导绑定的在线的咨询师
     List<Consultant> findBindCounselorIsonline(int pageNum, int pageSize, String username);
+    //更新督导今日求助数和求助总数
+    public void updateOrderAndTotalOrder(String username);
 }

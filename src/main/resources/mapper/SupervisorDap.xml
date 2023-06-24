@@ -77,4 +77,9 @@
     <select id="findBindCounselorIsonline" resultType="com.example.demo.domain.Consultant">
         select * from worker where bind_username = #{username} and is_online = "1" limit #{pageNum}, #{pageSize}
     </select>
+
+    <!--更新今日求助数和总求助数-->
+    <update id="updateOrderAndTotalOrder">
+        update worker set orderNumber = orderNumber + 1, totalOrder = totalOrder + 1 where username = #{username}
+    </update>
 </mapper>

@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.*;
-import com.example.demo.dao.AdminDao;
+
 import com.example.demo.dao.ConsultantDao;
 import com.example.demo.dao.SupervisorDao;
 import com.example.demo.domain.Consultant;
@@ -12,10 +11,9 @@ import com.example.demo.service.AdminService;
 import com.example.demo.service.SupervisorService;
 import com.example.demo.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -202,6 +200,7 @@ public class SupervisorController {
     @PatchMapping("/addCurrent/{username}")
     public Result addCurrent(@PathVariable String username){
         supervisorDao.addCurrentAssist(username);
+        supervisorDao.updateOrderAndTotalOrder(username);
         return Result.success();
     }
 

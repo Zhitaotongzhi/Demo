@@ -98,6 +98,6 @@
 
     <!--最近的响应求助记录-->
     <select id="currentAssist" resultType="com.example.demo.domain.Assist">
-        select * from assist ORDER BY startDate DESC limit #{limit}
+        select * from assist where s_username = #{username} ORDER BY startDate DESC limit #{limit}
     </select>
 </mapper>

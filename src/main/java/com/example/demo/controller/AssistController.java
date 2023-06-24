@@ -162,8 +162,8 @@ public class AssistController {
 
     //显示最近的求助记录
     @GetMapping("/currentRecords")
-    public Result currentRecord(){
-        List<Assist> assists = assistDao.currentAssist(5);
+    public Result currentRecord(@RequestParam String username){
+        List<Assist> assists = assistDao.currentAssist(5, username);
         Map<String, Object> assist = new HashMap<>();
         assist.put("assists", assists);
         return Result.success(assist);
