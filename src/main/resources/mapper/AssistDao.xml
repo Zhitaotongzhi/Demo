@@ -100,4 +100,14 @@
     <select id="currentAssist" resultType="com.example.demo.domain.Assist">
         select * from assist where s_username = #{username} ORDER BY startDate DESC limit #{limit}
     </select>
+
+    <!--咨询师自己的求助记录-->
+    <select id="findAllOwnAssist" resultType="com.example.demo.domain.Assist">
+        select * from assist where c_username = #{username} ORDER BY startDate DESC limit #{limit}
+    </select>
+
+    <!--咨询师通过时间查询自己的求助记录-->
+    <select id="findAllOwnAssist" resultType="com.example.demo.domain.Assist">
+        select * from assist where c_username = #{username} and startDate between #{startDate} and #{endDate} ORDER BY startDate DESC limit #{limit}
+    </select>
 </mapper>

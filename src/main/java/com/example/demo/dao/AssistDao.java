@@ -39,7 +39,11 @@ public interface AssistDao {
     //两个查询条件都有
     List<Assist> findAllBindAssistByAll(int pageNum, int pageSize, String counselorName, String startDate, String endDate);
 
+    //咨询师查看自己的求助记录
+    List<Assist> findAllOwnAssist(int pageNum, int pageSize, String username);
 
+    //咨询师通过时间查询自己的咨询记录
+    List<Assist> findAllOwnAssistByTime(int pageNum, int pageSize,String username, String startDate, String endDate);
 
 
     //通过时间查询求助记录
@@ -54,4 +58,6 @@ public interface AssistDao {
     public int supervisorTodayAssistCount(String supervisorUsername, String currentDate);
 
     public List<Assist> currentAssist(int limit, String username);
+
+
 }

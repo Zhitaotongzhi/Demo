@@ -40,10 +40,9 @@ public class AssistController {
 
     //管理员查看求助记录
     @GetMapping("/list")
-    public Result list(@RequestParam String pageNum, @RequestParam String pageSize, @RequestParam String counselorName, @RequestParam String startDate, @RequestParam String endDate, @RequestParam String authority, @RequestParam String username){
+    public Result list(@RequestParam String pageNum, @RequestParam String pageSize, @RequestParam String counselorName, @RequestParam String startDate, @RequestParam String endDate){
         int i = Integer.parseInt(pageNum);
         int j = Integer.parseInt(pageSize);
-        if(authority.equals("SystemManager")){}
         if(counselorName.isEmpty() && startDate.isEmpty()){
             List<Assist> assists = assistDao.findAllAssist((i - 1) * j, j);
             long total = assistDao.totalAll();
@@ -93,7 +92,7 @@ public class AssistController {
             return Result.success(maps);
         }else if(!counselorName.isEmpty()  && startDate.isEmpty()){
             List<Assist> assists = assistDao.findAllBindAssistByConName((i - 1) * j, j, counselorName, list);
-            long total = assistDao.totalByConName(counselorName);
+            long total = assists.size();
             Map<String, Object> maps = new HashMap<>();
             maps.put("total", total);
             maps.put("assists", assists);
@@ -101,14 +100,39 @@ public class AssistController {
         }
         else if(counselorName.isEmpty()  && !startDate.isEmpty()){
             List<Assist> assists = assistDao.findAllBindAssistByTime((i - 1) * j, j, startDate, endDate, list);
-            long total = assistDao.totalByTime(startDate, endDate);
+            long total = assists.size();
             Map<String, Object> maps = new HashMap<>();
             maps.put("total", total);
             maps.put("assists", assists);
             return Result.success(maps);
         }else if(!counselorName.isEmpty() && !startDate.isEmpty()){
             List<Assist> assists = assistDao.findAllBindAssistByAll((i - 1) * j, j, counselorName, startDate, endDate);
-            long total = assistDao.totalByAll(counselorName, startDate, endDate);
+            long total = assists.size();
+            Map<String, Object> maps = new HashMap<>();
+            maps.put("total", total);
+            maps.put("assists", assists);
+            return Result.success(maps);
+        }else{
+            return Result.failure("2", "操作失败");
+        }
+    }
+
+
+    //咨询师查看自己的求助记录
+    @GetMapping("/counselorSeeList/{counselorUsername}")
+    public Result bindAssistList(@RequestParam String pageNum, @RequestParam String pageSize, @PathVariable String counselorUsername, @RequestParam String startDate, @RequestParam String endDate){
+        int i = Integer.parseInt(pageNum);
+        int j = Integer.parseInt(pageSize);
+        if(startDate.isEmpty()){
+            List<Assist> assists = assistDao.findAllOwnAssist((i - 1) * j, j, counselorUsername);
+            long total = assists.size();
+            Map<String, Object> maps = new HashMap<>();
+            maps.put("total", total);
+            maps.put("assists", assists);
+            return Result.success(maps);
+        }else if(!startDate.isEmpty()){
+            List<Assist> assists = assistDao.findAllOwnAssistByTime((i - 1) * j, j, counselorUsername, startDate, endDate);
+            long total = assists.size();
             Map<String, Object> maps = new HashMap<>();
             maps.put("total", total);
             maps.put("assists", assists);
