@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.domain.Assist;
+import com.example.demo.domain.Record;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,27 @@ public interface AssistDao {
     long totalByConName(String counselorName);
     //通过督导姓名查询求助记录
     List<Assist> findAllAssistBySupName(int pageNum, int pageSize, String supervisorName);
+
+
+
+    //通过督导username查询求助记录
+    List<Assist> findAllBindAssist(int pageNum, int pageSize, String supervisorUsername);
+
+    //找到与该督导绑定的咨询师的用户名
+    List<String> findAllBindByUsername(String supervisorUsername);
+
+    //督导通过姓名查看与自己绑定的咨询师的求助记录
+    List<Assist> findAllBindAssistByConName(int pageNum, int pageSize, String name, List<String> list);
+
+    //督导通过时间查询与自己绑定的咨询师的咨询记录
+    List<Assist> findAllBindAssistByTime(int pageNum, int pageSize, String startDate, String endDate, List<String> list);
+
+    //两个查询条件都有
+    List<Assist> findAllBindAssistByAll(int pageNum, int pageSize, String counselorName, String startDate, String endDate);
+
+
+
+
     //通过时间查询求助记录
     List<Assist> findAllAssistByTime(int pageNum, int pageSize, String startDate, String endDate);
     long totalByTime(String startDate, String endDate);

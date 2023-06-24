@@ -70,6 +70,7 @@
         </if>
     </where>
     </select>
+
     <!--通过姓名查询与自己绑定的咨询师的咨询记录-->
     <select id="findAllBindRecordByName"  resultType="com.example.demo.domain.Record">
         select * from record <where>  <if test="list != null and list.size() > 0">
@@ -79,6 +80,7 @@
     </if> and v_name = #{name}
     </where> ORDER BY rid DESC
     </select>
+
     <!--通过时间查询与自己绑定的咨询师的咨询记录-->
     <select id="findAllBindRecordByTime" resultType="com.example.demo.domain.Record">
         select * from record <where>
