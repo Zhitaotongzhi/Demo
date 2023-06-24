@@ -40,10 +40,9 @@ public class AssistController {
 
     //管理员查看求助记录
     @GetMapping("/list")
-    public Result list(@RequestParam String pageNum, @RequestParam String pageSize, @RequestParam String counselorName, @RequestParam String startDate, @RequestParam String endDate, @RequestParam String authority, @RequestParam String username){
+    public Result list(@RequestParam String pageNum, @RequestParam String pageSize, @RequestParam String counselorName, @RequestParam String startDate, @RequestParam String endDate){
         int i = Integer.parseInt(pageNum);
         int j = Integer.parseInt(pageSize);
-        if(authority.equals("SystemManager")){}
         if(counselorName.isEmpty() && startDate.isEmpty()){
             List<Assist> assists = assistDao.findAllAssist((i - 1) * j, j);
             long total = assistDao.totalAll();
