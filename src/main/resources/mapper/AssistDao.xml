@@ -42,4 +42,50 @@
     </select>
 
 
+    <!--获得绑定的所有咨询师的username-->
+    <select id="findAllBindByUsername" parameterType="String" resultType="String">
+        select username from worker where bind_username = #{supervisorUsername}
+    </select>
+
+    <!--获得绑定的所有咨询师的所有求助记录-->
+    <select id="findAllBindAssist" resultType="com.example.demo.domain.Assist">
+        select * from assist where s_username = #{supervisorUsername} limit #{pageNum}, #{pageSize}
+    </select>
+
+    <!--通过绑定的咨询师姓名查询求助记录-->
+    <select id="findAllBindAssistByConName" resultType="com.example.demo.domain.Assist">
+        select * from assist
+        <where>  <if test="list != null and list.size() > 0">
+        AND c_username in <foreach collection="list" item="counselorUsername" open="(" separator="," close=")">
+                            #{counselorUsername}</foreach>
+         </if> and c_name = #{counselorName}
+        </where> ORDER BY rid DESC
+    </select>
+
+    <!--通过时间查询绑定的咨询师的求助记录-->
+    <select id="findAllBindAssistByTime" resultType="com.example.demo.domain.Assist">
+        select * from assist
+        <where>
+            <if test="list != null and list.size() > 0">
+                AND c_username in <foreach collection="list" item="counselorUsername" open="(" separator="," close=")">
+                #{counselorUsername}
+            </foreach>
+            </if> and starttime between #{startTime} and #{endTime}
+        </where> ORDER BY rid DESC
+    </select>
+
+    <!--通过所有条件查询绑定咨询师的求助记录-->
+    <select id="findAllBindAssistByAll" resultType="com.example.demo.domain.Assist">
+        select * from assist
+        <where>
+            <if test="list != null and list.size() > 0">
+                AND c_username in <foreach collection="list" item="counselorUsername" open="(" separator="," close=")">
+                #{counselorUsername}
+            </foreach>
+            </if> and c_name = #{counselorName} and starttime between #{startTime} and #{endTime}
+        </where> ORDER BY rid DESC
+    </select>
+
+
+
 </mapper>
