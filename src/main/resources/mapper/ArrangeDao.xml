@@ -32,6 +32,11 @@
         delete from schedule where w_username = #{w_username} and w_name = #{w_name} and date = #{date} and authority = "Counselor"
     </delete>
 
+    <!--移除某人一个月的所有值班-->
+    <delete id="deleteArrange" parameterType="String">
+        delete from schedule where w_username = #{w_username} and MONTH(date) = #{month}
+    </delete>
+
     <!--挑选某年某月某日可排班督导-->
     <select id="selectAvailableSupervisorByDate" resultType="com.example.demo.domain.ArrangeElement" parameterType="String">
         select name as w_name, username as w_username

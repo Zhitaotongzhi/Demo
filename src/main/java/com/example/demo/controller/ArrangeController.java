@@ -3,10 +3,8 @@ package com.example.demo.controller;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import com.example.demo.dao.ArrangeDao;
-import com.example.demo.domain.Arrange;
-import com.example.demo.domain.ArrangeArray;
-import com.example.demo.domain.ArrangeElement;
-import com.example.demo.domain.Consultant;
+import com.example.demo.dao.WorkerDao;
+import com.example.demo.domain.*;
 import com.example.demo.service.ArrangeService;
 import com.example.demo.utils.Result;
 import org.apache.ibatis.annotations.Mapper;
@@ -26,6 +24,8 @@ public class ArrangeController {
 
     @Autowired
     private ArrangeService arrangeService;
+    @Autowired
+    private WorkerDao workerDao;
 
     //查询月排班
     @GetMapping("/list")
@@ -121,4 +121,28 @@ public class ArrangeController {
         available.put("dateList", dateList);
         return Result.success(available);
     }
+
+    //更新某人的月排班
+    @PostMapping("/updateArrange")
+    public Result updateArrange(@RequestBody ArrangeArray arrange){
+        String workerUsername = arrange.getWorkers()[0].getW_username();
+        String[] dates = arrange.getDates();
+        Calendar calendar = Calendar.getInstance();
+        String month = (calendar.get(Calendar.MONTH) + 1) + "";
+        arrangeDao.deleteArrange(month, workerUsername);
+        Worker worker = workerDao.selectWorkerByUsername(workerUsername);
+        String workerAuthority = worker.getAuthority();
+        String workerName = worker.getName();
+        if (workerAuthority.equals("Counselor")){
+            for (int i=0 ;i<dates.length ; i++){
+                arrangeDao.insertCounselorArrange(dates[i], workerName, workerUsername);
+            }
+        }else if(workerAuthority.equals("Supervisor")){
+            for (int i=0 ;i<dates.length ; i++){
+                arrangeDao.insertCounselorArrange(dates[i], workerName, workerUsername);
+            }
+        }
+        return Result.success();
+    }
+
 }

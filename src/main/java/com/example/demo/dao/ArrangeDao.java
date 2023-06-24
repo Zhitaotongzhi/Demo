@@ -21,6 +21,8 @@ public interface ArrangeDao {
 
     public void deleteCounselorArrange(String date, String w_name, String w_username);
 
+    public void deleteArrange(String month, String w_username);
+
     public List<ArrangeElement> selectAvailableSupervisorByDate(String date);
 
     public List<ArrangeElement> selectAvailableCounselorByDate(String date);
