@@ -27,7 +27,7 @@ public class AssistController {
         }
     }
 
-    //管理员查看咨询记录
+    //管理员查看求助记录
     @GetMapping("/list")
     public Result list(@RequestParam String pageNum, @RequestParam String pageSize, @RequestParam String counselorName, @RequestParam String startDate, @RequestParam String endDate){
         int i = Integer.parseInt(pageNum);

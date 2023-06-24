@@ -29,7 +29,7 @@
     </select>
     <!--查找对应时间的咨询记录-->
     <select id="findAllRecordByTime" resultType="com.example.demo.domain.Record">
-        select * from record where starttime between #{startDate} and #{endDate} ORDER BY rid DESC
+        select * from record where starttime between #{startDate} and #{endDate} ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
     <!--访客一段时间内的咨询记录-->
     <select id="findAllRecordByNameAndTime" resultType="com.example.demo.domain.Record">
@@ -38,7 +38,7 @@
 
     <!--咨询师一段时间内的咨询记录-->
     <select id="findAllRecordByUsernameAndTime" resultType="com.example.demo.domain.Record">
-        select * from record where c_name = #{counselorName} and starttime between #{startDate} and #{endDate} ORDER BY rid DESC
+        select * from record where c_name = #{counselorName} and starttime between #{startDate} and #{endDate} ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
     <!--查找满足所有条件的咨询记录-->
     <select id="findAllRecordByAll" resultType="com.example.demo.domain.Record">
