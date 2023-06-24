@@ -86,4 +86,18 @@
         </where> ORDER BY startDate DESC
     </select>
 
+    <!--统计某督导一天响应求助的总时长-->
+    <select id="supervisorTodayTotalTime" resultType="java.sql.Time">
+        select SEC_TO_TIME(sum(TIME_TO_SEC(duration))) from assist where s_username = #{supervisorUsername} and startDate > #{currentDate}
+    </select>
+
+    <!--统计某督导当天响应求助的次数-->
+    <select id="supervisorTodayAssistCount" parameterType="String" resultType="int">
+        select count(*) from assist where s_username = #{supervisorUsername} and startDate > #{currentDate}
+    </select>
+
+    <!--最近的响应求助记录-->
+    <select id="currentAssist" resultType="com.example.demo.domain.Assist">
+        select * from assist ORDER BY startDate DESC limit #{limit}
+    </select>
 </mapper>

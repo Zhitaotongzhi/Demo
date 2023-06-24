@@ -5,6 +5,7 @@ import com.example.demo.domain.Record;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -47,4 +48,13 @@ public interface AssistDao {
     //通过所有条件查询求助记录
     List<Assist> findAllAssistByAll(int pageNum, int pageSize, String counselorName, String startDate, String endDate);
     long totalByAll(String counselorName, String startDate, String endDate);
+
+    //统计某督导今天总共的响应求助时长
+    public Date supervisorTodayTotalTime(String supervisorUsername, String currentDate);
+
+    //统计某督导今天总共的响应求助次数
+    public int supervisorTodayAssistCount(String supervisorUsername, String currentDate);
+
+    //显示最近的求助记录
+    List<Assist> currentAssist(int limit);
 }
