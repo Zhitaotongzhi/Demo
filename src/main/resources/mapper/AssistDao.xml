@@ -59,7 +59,7 @@
         AND c_username in <foreach collection="list" item="counselorUsername" open="(" separator="," close=")">
                             #{counselorUsername}</foreach>
          </if> and c_name = #{counselorName}
-        </where> ORDER BY rid DESC
+        </where> ORDER BY startDate DESC
     </select>
 
     <!--通过时间查询绑定的咨询师的求助记录-->
@@ -70,8 +70,8 @@
                 AND c_username in <foreach collection="list" item="counselorUsername" open="(" separator="," close=")">
                 #{counselorUsername}
             </foreach>
-            </if> and starttime between #{startTime} and #{endTime}
-        </where> ORDER BY rid DESC
+            </if> and startDate between #{startDate} and #{endDate}
+        </where> ORDER BY startDate DESC
     </select>
 
     <!--通过所有条件查询绑定咨询师的求助记录-->
@@ -82,10 +82,8 @@
                 AND c_username in <foreach collection="list" item="counselorUsername" open="(" separator="," close=")">
                 #{counselorUsername}
             </foreach>
-            </if> and c_name = #{counselorName} and starttime between #{startTime} and #{endTime}
-        </where> ORDER BY rid DESC
+            </if> and c_name = #{counselorName} and startDate between #{startDate} and #{endDate}
+        </where> ORDER BY startDate DESC
     </select>
-
-
 
 </mapper>

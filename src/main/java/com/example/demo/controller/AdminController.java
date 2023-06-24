@@ -188,8 +188,8 @@ public class AdminController {
 
 
     //工作人员离线
-    @PatchMapping("/user/exit/{username}")
-    public Result logout(@PathVariable String username){
+    @GetMapping("/user/exit")
+    public Result logout(@RequestParam String username){
         workerDao.updateIsOffline(username);
         return Result.success();
     }

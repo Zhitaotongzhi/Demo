@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.AssistDao;
+import com.example.demo.dao.ConsultantDao;
+import com.example.demo.dao.SupervisorDao;
 import com.example.demo.domain.Assist;
 import com.example.demo.domain.Record;
 import com.example.demo.utils.Result;
@@ -19,6 +21,12 @@ import java.util.Map;
 public class AssistController {
     @Autowired
     private AssistDao assistDao;
+
+    @Autowired
+    private SupervisorDao supervisorDao;
+
+    @Autowired
+    private ConsultantDao consultantDao;
 
     @PostMapping("/insert")
     public Result insertAssist(@RequestBody Assist assist){
@@ -119,17 +127,17 @@ public class AssistController {
 //        return Result.success(total);
 //    }
 
-//    //督导今日响应求助总时长
-//    @GetMapping("/supervisorTotalTime/{supervisorUsername}")
-//    public Result conTotalTime(@PathVariable String supervisorUsername){
-//        LocalDate date = LocalDate.now();
-//        System.out.println(date);
-//        String name = supervisorDao.findByUsername(supervisorUsername);
-//        Date totalTime = assistDao.supervisorTotalTime(supervisorUsername, date.toString());
-//        Map<String, Object> total = new HashMap<>();
-//        total.put("totalTime", totalTime);
-//        return Result.success(total);
-//    }
+    //督导今日响应求助总时长
+    /*@GetMapping("/supervisorTotalTime/{supervisorUsername}")
+    public Result conTotalTime(@PathVariable String supervisorUsername){
+        LocalDate date = LocalDate.now();
+        System.out.println(date);
+        String name = supervisorDao.findByUsername(supervisorUsername);
+        Date totalTime = assistDao.supervisorTotalTime(supervisorUsername, date.toString());
+        Map<String, Object> total = new HashMap<>();
+        total.put("totalTime", totalTime);
+        return Result.success(total);
+    }*/
 
 //    //今日统计求助总数
 //    @GetMapping("/totalCount")
@@ -142,32 +150,24 @@ public class AssistController {
 //    }
 
 
-//    //督导今日响应求助总数
-//    @GetMapping("/supervisorTotalCount/{username}")
-//    public Result conTotalCount(@PathVariable String username){
-//        LocalDate date = LocalDate.now();
-//        String counselorName = consultantDao.findName(username);
-//        int total = assistDao.counselorRecordCount(counselorName, date.toString());
-//        Map<String, Object> totals = new HashMap<>();
-//        totals.put("total", total);
-//        return Result.success(totals);
-//    }
-//
-//    //显示最近的求助记录
-//    @GetMapping("/currentRecords")
-//    public Result currentRecord(){
-//        List<Record> records = recordDao.currentRecord(5);
-//        Map<String, Object> record = new HashMap<>();
-//        record.put("records", records);
-//        return Result.success(record);
-//    }
-//
-//    //正在进行的求助总数
-//    @GetMapping("/currentCount")
-//    public Result currentCount(){
-//        long total = recordDao.currentCount();
-//        Map<String, Object> count = new HashMap<>();
-//        count.put("total", total);
-//        return Result.success(count);
-//    }
+    //督导今日响应求助总数
+    /*@GetMapping("/supervisorTotalCount/{username}")
+    public Result conTotalCount(@PathVariable String username){
+        LocalDate date = LocalDate.now();
+        String counselorName = consultantDao.findName(username);
+        int total = assistDao.counselorRecordCount(counselorName, date.toString());
+        Map<String, Object> totals = new HashMap<>();
+        totals.put("total", total);
+        return Result.success(totals);
+    }*/
+
+    //显示最近的求助记录
+    /*@GetMapping("/currentRecords")
+    public Result currentRecord(){
+        List<Record> records = recordDao.currentRecord(5);
+        Map<String, Object> record = new HashMap<>();
+        record.put("records", records);
+        return Result.success(record);
+    }*/
+
 }

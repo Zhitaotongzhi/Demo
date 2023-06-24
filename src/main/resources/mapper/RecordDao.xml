@@ -33,7 +33,7 @@
     </select>
     <!--访客一段时间内的咨询记录-->
     <select id="findAllRecordByNameAndTime" resultType="com.example.demo.domain.Record">
-        select * from record where v_name = #{visitorName} and starttime between #{startDate} and #{endDate} ORDER BY rid DESC
+        select * from record where v_name = #{visitorName} and starttime between #{startDate} and #{endDate} ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
 
     <!--咨询师一段时间内的咨询记录-->
@@ -42,7 +42,7 @@
     </select>
     <!--查找满足所有条件的咨询记录-->
     <select id="findAllRecordByAll" resultType="com.example.demo.domain.Record">
-        select * from record where v_name = #{visitorName} and c_name = #{counselorName} and starttime between #{startDate} and #{endDate} ORDER BY rid DESC
+        select * from record where v_name = #{visitorName} and c_name = #{counselorName} and starttime between #{startDate} and #{endDate} ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
     <!--找到所有与该督导绑定的咨询师的name-->
     <select id="findAllBindByUsername" parameterType="String" resultType="String">
@@ -78,7 +78,7 @@
         #{counselorName}
     </foreach>
     </if> and v_name = #{name}
-    </where> ORDER BY rid DESC
+    </where> ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
 
     <!--通过时间查询与自己绑定的咨询师的咨询记录-->
@@ -88,8 +88,8 @@
             AND c_name in <foreach collection="list" item="counselorName" open="(" separator="," close=")">
             #{counselorName}
         </foreach>
-        </if> and starttime between #{startTime} and #{endTime}
-    </where> ORDER BY rid DESC
+        </if> and starttime between #{startDate} and #{endDate}
+    </where> ORDER BY rid DESC limit #{pageNum}, #{pageSize}
     </select>
     <!--返回访客最后一次咨询的时间-->
     <select id="findLatestTime" parameterType="String">
