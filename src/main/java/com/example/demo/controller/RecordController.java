@@ -301,4 +301,24 @@ public class RecordController {
         maps.put("everyHourCount", lists);
         return Result.success(maps);
     }
+
+    @GetMapping("/goList")
+    public Result goList(@RequestParam String authority){
+        if(authority.equals("SystemManager")){
+            Map<String, Object> maps = new HashMap<>();
+            maps.put("url", "/list");
+            return Result.success(maps);
+        }else if(authority.equals("Supervisor")){
+            Map<String, Object> maps = new HashMap<>();
+            maps.put("url", "/listForSupervisor");
+            return Result.success(maps);
+        }else if(authority.equals("Counselor")){
+            Map<String, Object> maps = new HashMap<>();
+            maps.put("url", "/listForCounselor");
+            return Result.success(maps);
+        }else{
+            return Result.failure("2", "操作失败");
+        }
+    }
+
 }
