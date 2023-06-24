@@ -129,16 +129,15 @@ public class AssistController {
 //    }
 
     //督导今日响应求助总时长
-    /*@GetMapping("/supervisorTotalTime/{supervisorUsername}")
-    public Result conTotalTime(@PathVariable String supervisorUsername){
+    @GetMapping("/supervisorTodayAssistTime/{supervisorUsername}")
+    public Result assistTotalTime(@PathVariable String supervisorUsername){
         LocalDate date = LocalDate.now();
         System.out.println(date);
-        String name = supervisorDao.findByUsername(supervisorUsername);
-        Date totalTime = assistDao.supervisorTotalTime(supervisorUsername, date.toString());
+        Date totalTime = assistDao.supervisorTodayTotalTime(supervisorUsername, date.toString());
         Map<String, Object> total = new HashMap<>();
         total.put("totalTime", totalTime);
         return Result.success(total);
-    }*/
+    }
 
 //    //今日统计求助总数
 //    @GetMapping("/totalCount")
@@ -152,23 +151,22 @@ public class AssistController {
 
 
     //督导今日响应求助总数
-    /*@GetMapping("/supervisorTotalCount/{username}")
-    public Result conTotalCount(@PathVariable String username){
+    @GetMapping("/supervisorTodayAssistCount/{supervisorUsername}")
+    public Result assistTotalCount(@PathVariable String supervisorUsername){
         LocalDate date = LocalDate.now();
-        String counselorName = consultantDao.findName(username);
-        int total = assistDao.counselorRecordCount(counselorName, date.toString());
+        int total = assistDao.supervisorTodayAssistCount(supervisorUsername, date.toString());
         Map<String, Object> totals = new HashMap<>();
         totals.put("total", total);
         return Result.success(totals);
-    }*/
+    }
 
     //显示最近的求助记录
-    /*@GetMapping("/currentRecords")
+    @GetMapping("/currentRecords")
     public Result currentRecord(){
-        List<Record> records = recordDao.currentRecord(5);
-        Map<String, Object> record = new HashMap<>();
-        record.put("records", records);
-        return Result.success(record);
-    }*/
+        List<Assist> assists = assistDao.currentAssist(5);
+        Map<String, Object> assist = new HashMap<>();
+        assist.put("assists", assists);
+        return Result.success(assist);
+    }
 
 }

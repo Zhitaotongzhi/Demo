@@ -47,6 +47,4 @@ public interface AssistDao {
     //通过所有条件查询求助记录
     List<Assist> findAllAssistByAll(int pageNum, int pageSize, String counselorName, String startDate, String endDate);
     long totalByAll(String counselorName, String startDate, String endDate);
-    //咨询数查看求助记录
-    List<Assist> findAllAssistByUsername(int pageNum, int pageSize, String counselor);
 }

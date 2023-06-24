@@ -115,7 +115,8 @@ public class ArrangeController {
 
     @GetMapping("/schedule")
     public Result getOwnSchedule(@RequestParam String name){
-        String month = "6";
+        Calendar calendar = Calendar.getInstance();
+        String month = (calendar.get(Calendar.MONTH) + 1) + "";
         List<String> dateList = arrangeDao.selectSchedule(name, month);
         Map<String, Object> available = new HashMap<>();
         available.put("dateList", dateList);
